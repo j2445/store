@@ -1,414 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Save Radar</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts for Better Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+    <title>SaveRadar - Deals</title>
+    <link rel="icon" href="https://i.ibb.co/hxz6WY7g/logo-new.png" type="image/x-icon">
     <style>
-        /* Body Styling */
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
+            margin: 0; /* Remove body margin */
+            padding: 0; /* Remove body padding */
+            background: #f4f4f4;
         }
 
-        /* Header Section with Image */
-        header {
-            background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-            background-size: cover;
-            background-position: center;
+        h1 {
+            text-align: center;
+            margin: 80px 0 40px; /* Increased space below the title */
+            font-size: 36px; /* Increase font size */
+            font-weight: bold;
+            color: #333;
+        }
+
+        .filter-container {
+            text-align: left; /* Align the filter to the left */
+            margin-left: 40px; /* Add left margin for spacing */
+            margin-bottom: 20px;
+        }
+
+        .filter-container select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 products per row on large screens */
+            gap: 20px;
+            padding: 0; /* Remove padding inside the container */
+            margin: 0 auto; /* Center the container */
+            max-width: 100%; /* Ensure the container fills the screen width */
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .card h3 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .price {
+            font-size: 14px;
+            color: green;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: red;
+        }
+
+        .discount {
+            background: red;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            background: blue;
+            padding: 8px;
+            display: inline-block;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .pagination button.disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #333;
             color: white;
             padding: 20px;
             text-align: center;
             position: relative;
-            overflow: hidden;
-            height: 50%; /* Ensures full screen height for header */
-        }
-
-        header h1 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 80px; /* Adjusted font size */
-            font-weight: 600;
-            color: white;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-            animation: fadeInUp 2s ease-out forwards;
-            padding: 5%;
-        }
-
-        /* Animation for Text Fade-In */
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Other Content Styling */
-        nav {
-            background: white;
-            color: #007bff;
-            padding: 8px 1px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 50px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: fixed;
+            bottom: 0;
             width: 100%;
-            top: 0;
-            z-index: 100;
+            margin-top: 40px;
         }
 
-        nav a {
-            color: #007bff;
-            text-decoration: none;
-            padding: 5px 10px;
-            margin: 0 10px;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        nav a:hover {
-            background: #007bff;
-            color: white;
-        }
-
-        nav img {
-            width: 50px; /* Adjust size for logo */
-            height: auto;
-            padding: 5px;
-        }
-
-        /* Product Container */
-        #product-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            margin-top: 70px; /* To avoid content overlap with navbar */
-        }
-
-        /* For Product Cards */
-        .product {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 250px;
-            text-align: center;
-            transition: transform 0.2s ease-in-out;
-            border: 1px solid #ddd; /* Adds a border around the product */
-        }
-
-        .product:hover {
-            transform: scale(1.05);
-        }
-
-        /* For Product Images */
-        .product img {
-            width: 150px;
-            height: 150px; /* Set a fixed height */
-            object-fit: cover; /* Ensure the images cover the area without distorting */
-            border-radius: 10px;
-        }
-
-        .product .details {
-            padding: 15px 0;
-            border-top: 1px solid #ddd; /* Border above the details */
-            border-bottom: 1px solid #ddd; /* Border below the details */
-        }
-
-        .buy-btn {
-            display: inline-block;
-            background: #28a745;
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        .buy-btn:hover {
-            background: #218838;
-        }
-
-        /* Footer Styling */
-        footer {
-            background: #343a40;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        footer a {
+        .footer a {
             color: white;
             text-decoration: none;
-            margin: 0 10px;
         }
 
-        footer a:hover {
-            color: #28a745;
-        }
-
-        /* Social Icons */
-        .social-icons i {
-            margin: 0 10px;
-            font-size: 24px;
-        }
-
-        /* About Section */
-        #about {
-            padding: 40px 20px;
-            background: #f1f1f1;
-            text-align: center;
-        }
-
-        #about h2 {
-            color: #007bff;
-            margin-bottom: 20px;
-        }
-
-        #about p {
-            color: #555;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        /* Privacy Policy Section */
-        #privacy-policy {
-            padding: 40px 20px;
-            background: #e9ecef;
-            text-align: center;
-        }
-
-        #privacy-policy h2 {
-            color: #007bff;
-            margin-bottom: 20px;
-        }
-
-        #privacy-policy p {
-            color: #555;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        /* Pagination Styling */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        .pagination button {
-            padding: 10px;
-            margin: 0 5px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .pagination button:disabled {
-            background-color: #dcdcdc;
-            cursor: not-allowed;
-        }
-
-        .pagination button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Responsive Design for Mobile */
+        /* Mobile view adjustments for 2 rows and 4 products per row */
         @media (max-width: 768px) {
-            #product-container {
-                justify-content: space-around;
+            .container {
+                grid-template-columns: repeat(4, 1fr); /* 4 products per row on mobile */
             }
 
-            .product {
-                width: 45%; /* Allows 2 products per row */
+            .card {
+                width: 100%;
+            }
+
+            .card img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .card h3 {
+                font-size: 14px;
+            }
+
+            .price, .old-price {
+                font-size: 12px;
+            }
+
+            .discount {
+                font-size: 12px;
+            }
+
+            .container {
+                padding: 0 5px;
+            }
+
+            h1 {
+                font-size: 22px;
+                margin-top: 10px;
             }
         }
 
+        /* Extra small devices (phones in portrait mode) */
         @media (max-width: 480px) {
-            .product {
-                width: 30%; /* Allows 3 products per row */
+            .container {
+                grid-template-columns: repeat(2, 1fr); /* 2 products per row */
+            }
+
+            .card img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .card h3 {
+                font-size: 12px;
+            }
+
+            .price, .old-price {
+                font-size: 10px;
+            }
+
+            .discount {
+                font-size: 10px;
+            }
+
+            a {
+                padding: 6px;
+                font-size: 12px;
             }
         }
     </style>
-    <link rel="icon" href="https://i.ibb.co/KpRmdY76/logo.jpg" type="image/jpeg">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav>
-        <img src="https://i.ibb.co/KpRmdY76/logo.jpg" alt="Logo">
-        <div>
-            <a href="#">Home</a>
-            <a href="#products">Products</a>
-            <a href="#about">About</a>
-            <a href="#privacy-policy">Privacy Policy</a>
-        </div>
-    </nav>
+    <h1>SaveRadar</h1>
+    <div class="filter-container">
+        <select id="categoryFilter" onchange="filterCategory()">
+            <option value="">All Categories</option>
+        </select>
+    </div>
+    <div class="container" id="deals-container"></div>
+    <div class="pagination" id="pagination"></div>
 
-    <!-- Header Section with Image -->
-    <header>
-        <h1>SAVE RADAR</h1>
-    </header>
-    
-    <!-- About Section -->
-    <section id="about">
-        <h2>About Save Radar</h2>
-        <p>Save Radar is your one-stop destination for finding the best deals on products across various categories, from electronics to fashion. We provide an easy way to search for discounted products, making your shopping experience smarter and more efficient.</p>
-        <p>Our mission is to save you time and money by bringing the best offers directly to you. Join us and start shopping smart today!</p>
-        <p>---When you buy through links on saveradar.com we may earn a commission--</p>
-    </section>
-
-    <!-- Search Bar Section -->
-    <div style="text-align: center; padding: 20px;">
-        <input type="text" id="search" placeholder="Search products..." style="width: 80%; padding: 15px; border-radius: 5px; border: 1px solid #ccc;">
+    <div class="footer">
+        <p>© 2025 SaveRadar. All rights reserved.</p>
     </div>
 
-    <!-- Product Section -->
-    <main id="products">
-        <div id="product-container"></div>
-        
-        <!-- Pagination Controls -->
-        <div class="pagination">
-            <button id="prev-page" onclick="changePage('prev')">Previous</button>
-            <button id="next-page" onclick="changePage('next')">Next</button>
-        </div>
-    </main>
-
-    <!-- Privacy Policy Section -->
-    <section id="privacy-policy">
-        <h2>Privacy Policy</h2>
-        <p>Your privacy is important to us. This privacy policy outlines how we collect, use, and protect your personal information. By using our website, you agree to the collection and use of information in accordance with this policy.</p>
-        <p>We collect personal information such as your name, email address, and browsing data to improve our services. We may use this information to contact you with newsletters, marketing materials, or other promotional content.</p>
-        <p>We will never sell, trade, or rent your personal information to third parties. We implement security measures to ensure your data is protected from unauthorized access.</p>
-        <p>If you have any questions or concerns about our privacy policy, feel free to contact us at <a href="mailto:info@saveradar.com">info@saveradar.com</a>.</p>
-    </section>
-
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 Save Radar. All Rights Reserved.</p>
-        <div class="social-icons">
-            <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
-            <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
-            <a href="#" target="_blank"><i class="fa fa-instagram"></i></a>
-        </div>
-        <p>
-            <a href="#about">About Us</a> | 
-            <a href="#privacy-policy">Privacy Policy</a>
-        </p>
-    </footer>
-
     <script>
-        const SHEET_URL = 'https://script.google.com/macros/s/AKfycbx7xkP5WggbAfj99RyAy2CpurxUjml2KSIXK-qbOPz2hNuM2NsC3CrgAncCpVIJLkuH/exec';
-        const PRODUCTS_PER_PAGE = 40;
+        const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQHnHu0HrvLs3a7TrYvc90IDAZC72BO4ciXOSG6HkfkIhCtHhNRNtRGbzJM0Vue-W04VWGcLjo4IKgN/pub?output=csv';
         let currentPage = 1;
-        let products = [];
+        const itemsPerPage = 100;
+        let allDeals = [];
+        let filteredDeals = [];
+        let categories = [];
 
-        async function fetchProducts() {
-            const response = await fetch(SHEET_URL);
-            const data = await response.json();
-            products = data;
-            displayProducts();
-        }
+        async function fetchDeals() {
+            try {
+                const response = await fetch(sheetURL);
+                const data = await response.text();
+                const rows = data.split('\n').slice(1);
+                allDeals = rows.map(row => {
+                    const cols = row.replace(/\r/g, '').split(',');
+                    if (cols.length < 10) return null;
+                    let [id, category, store, title, salePrice, regularPrice, savings, discount, image1, link] = cols.map(col => col.trim());
+                    if (category && !categories.includes(category)) {
+                        categories.push(category);
+                    }
+                    return { id, category, store, title, salePrice, regularPrice, savings, discount, image1, link };
+                }).filter(deal => deal !== null);
 
-        function displayProducts() {
-            const container = document.getElementById('product-container');
-            container.innerHTML = '';
-
-            const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
-            const endIndex = startIndex + PRODUCTS_PER_PAGE;
-            const currentProducts = products.slice(startIndex, endIndex);
-
-            currentProducts.forEach(product => {
-                const salePrice = parseFloat(product['Sale Price']);
-                const regularPrice = parseFloat(product['Regular Price']);
-                
-                if (!isNaN(salePrice) && !isNaN(regularPrice) && regularPrice > 0) {
-                    const discount = Math.floor(((regularPrice - salePrice) / regularPrice) * 100);
-                    const productCard = document.createElement('div');
-                    productCard.classList.add('product');
-                    productCard.innerHTML = `
-                        <img src="${product.Image1}" alt="${product.Details}">
-                        <div class="details">
-                            <h2>${product.Details}</h2>
-                            <p>Brand: ${product.Brand}</p>
-                            <p>Sale Price: <strong style="color: red;">$${salePrice.toFixed(2)}</strong></p>
-                            <p>Regular Price: <s>$${regularPrice.toFixed(2)}</s></p>
-                            <p style="color: green; font-weight: bold;">Discount: ${discount}%</p>
-                        </div>
-                        <a href="${product.Link}" target="_blank" class="buy-btn">Buy Now</a>
-                    `;
-                    container.appendChild(productCard);
-                }
-            });
-
-            document.getElementById('prev-page').disabled = currentPage === 1;
-            document.getElementById('next-page').disabled = currentPage * PRODUCTS_PER_PAGE >= products.length;
-        }
-
-        function changePage(direction) {
-            if (direction === 'next') {
-                currentPage++;
-            } else if (direction === 'prev') {
-                currentPage--;
+                populateCategoryFilter();
+                filteredDeals = [...allDeals];
+                renderDeals();
+                renderPagination();
+            } catch (error) {
+                console.error("Error fetching the deals:", error);
             }
-            displayProducts();
+        }
 
-            // Scroll to the top of the product container
-            document.getElementById('product-container').scrollIntoView({
-                behavior: 'smooth', // Enables smooth scrolling
-                block: 'start' // Ensures it scrolls to the top of the container
+        function populateCategoryFilter() {
+            const categoryFilter = document.getElementById('categoryFilter');
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                categoryFilter.appendChild(option);
             });
         }
 
-        document.getElementById('search').addEventListener('input', function(e) {
-            const query = e.target.value.toLowerCase();
-            const filteredProducts = products.filter(product => product.Details.toLowerCase().includes(query));
-            displayFilteredProducts(filteredProducts);
-        });
+        function renderDeals() {
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const dealsToShow = filteredDeals.slice(start, end);
+            let dealsHTML = '';
 
-        function displayFilteredProducts(filteredProducts) {
-            const container = document.getElementById('product-container');
-            container.innerHTML = '';
-
-            filteredProducts.forEach(product => {
-                const salePrice = parseFloat(product['Sale Price']);
-                const regularPrice = parseFloat(product['Regular Price']);
-                
-                if (!isNaN(salePrice) && !isNaN(regularPrice) && regularPrice > 0) {
-                    const discount = Math.floor(((regularPrice - salePrice) / regularPrice) * 100);
-                    const productCard = document.createElement('div');
-                    productCard.classList.add('product');
-                    productCard.innerHTML = `
-                        <img src="${product.Image1}" alt="${product.Details}">
-                        <div class="details">
-                            <h2>${product.Details}</h2>
-                            <p>Brand: ${product.Brand}</p>
-                            <p>Sale Price: <strong style="color: red;">$${salePrice.toFixed(2)}</strong></p>
-                            <p>Regular Price: <s>$${regularPrice.toFixed(2)}</s></p>
-                            <p style="color: green; font-weight: bold;">Discount: ${discount}%</p>
-                        </div>
-                        <a href="${product.Link}" target="_blank" class="buy-btn">Buy Now</a>
-                    `;
-                    container.appendChild(productCard);
-                }
+            dealsToShow.forEach(deal => {
+                const { image1, title, salePrice, regularPrice, discount, link } = deal;
+                dealsHTML += `
+                    <div class="card">
+                        <img src="${image1}" alt="${title}">
+                        <h3>${title}</h3>
+                        <p class="price">${salePrice} <span class="old-price">${regularPrice}</span></p>
+                        <p class="discount">${discount}</p>
+                        <a href="${link}" target="_blank">BUY</a>
+                    </div>
+                `;
             });
+            document.getElementById('deals-container').innerHTML = dealsHTML;
+            window.scrollTo(0, 0);
         }
 
-        fetchProducts();
+        function renderPagination() {
+            const pageCount = Math.ceil(filteredDeals.length / itemsPerPage);
+            let paginationHTML = '';
+
+            if (currentPage > 1) {
+                paginationHTML += `<button onclick="changePage(${currentPage - 1})">Previous</button>`;
+            }
+
+            for (let i = 1; i <= pageCount; i++) {
+                paginationHTML += `<button onclick="changePage(${i})" ${i === currentPage ? 'disabled' : ''}>${i}</button>`;
+            }
+
+            if (currentPage < pageCount) {
+                paginationHTML += `<button onclick="changePage(${currentPage + 1})">Next</button>`;
+            }
+
+            document.getElementById('pagination').innerHTML = paginationHTML;
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            renderDeals();
+            renderPagination();
+        }
+
+        function filterCategory() {
+            const selectedCategory = document.getElementById('categoryFilter').value;
+            if (selectedCategory) {
+                filteredDeals = allDeals.filter(deal => deal.category === selectedCategory);
+            } else {
+                filteredDeals = [...allDeals];
+            }
+            currentPage = 1;
+            renderDeals();
+            renderPagination();
+        }
+
+        fetchDeals();
     </script>
 </body>
 </html>
