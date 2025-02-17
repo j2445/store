@@ -117,17 +117,60 @@
         .footer {
             background-color: #333;
             color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            margin-top: 40px;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
 
-        .footer a {
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            border-bottom: 2px solid yellow;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin: 5px 0;
+        }
+
+        .footer-section ul li a {
             color: white;
             text-decoration: none;
+        }
+
+        .footer-section input[type="email"] {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: none;
+            width: calc(100% - 22px);
+        }
+
+        .footer-section button {
+            background-color: yellow;
+            color: #333;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
         }
 
         /* Mobile view adjustments for 2 rows and 4 products per row */
@@ -208,7 +251,38 @@
     <div class="pagination" id="pagination"></div>
 
     <div class="footer">
-        <p>© 2025 SaveRadar. All rights reserved.</p>
+        <div class="footer-section">
+            <h3>About Save Radar</h3>
+            <p>Your ultimate destination for the best deals and savings across Amazon. We help you find amazing discounts on products you love.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Today's Deals</a></li>
+                <li><a href="#">Best Sellers</a></li>
+                <li><a href="#">New Arrivals</a></li>
+                <li><a href="#">Deal Alerts</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Categories</h3>
+            <ul>
+                <li><a href="#">Electronics</a></li>
+                <li><a href="#">Fashion</a></li>
+                <li><a href="#">Home & Kitchen</a></li>
+                <li><a href="#">Beauty & Personal Care</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Newsletter</h3>
+            <p>Subscribe to get special offers, free giveaways, and amazing deals.</p>
+            <input type="email" placeholder="Enter your email">
+            <button>Subscribe</button>
+            <button>Follow us</button>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Save Radar. All rights reserved.</p>
+        </div>
     </div>
 
     <script>
