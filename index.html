@@ -207,7 +207,7 @@
         }
 
         .footer-section button {
-            background-color: yellow;
+            background-color: gold; /* Change to gold */
             color: #333;
             border: none;
             padding: 10px;
@@ -219,7 +219,7 @@
 
         .footer-section button:hover {
             transform: scale(1.1);
-            background-color: #ffd700; /* Slightly darker yellow on hover */
+            background-color: #ffd700; /* Slightly darker gold on hover */
         }
 
         .footer-bottom {
@@ -429,7 +429,9 @@
             <p>Subscribe to get special offers, free giveaways, and amazing deals.</p>
             <input type="email" placeholder="Enter your email">
             <button>Subscribe</button>
-            <button>Follow us</button>
+            <a href="https://www.instagram.com/save_radar/" target="_blank">
+                <button>Follow us</button>
+            </a>
         </div>
         <div class="footer-bottom">
             <p>© 2025 Save Radar. All rights reserved.</p>
@@ -444,6 +446,7 @@
             <p>Enter your email to receive the latest deals and offers!</p>
             <input type="email" placeholder="Enter your email" id="popupEmail">
             <button onclick="subscribe()">Subscribe</button>
+            <button onclick="closePopup()">Close</button>
         </div>
     </div>
 
