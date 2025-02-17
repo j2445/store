@@ -40,6 +40,7 @@
             padding: 20px;
             gap: 20px;
             background-color: #1a1a1a;
+            width: calc(4 * 220px + 3 * 20px); /* 4 cards + 3 gaps */
         }
 
         .card {
@@ -48,7 +49,7 @@
             border-radius: 12px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             text-align: left;
-            min-width: 200px;
+            width: 220px; /* Fixed width for each card */
             color: white;
             position: relative;
         }
@@ -267,16 +268,6 @@
         </select>
     </div>
     <div class="container" id="deals-container">
-        <div class="card">
-            <div class="discount">60% OFF</div>
-            <img src="image_url" alt="Product Name">
-            <h3>Product Name</h3>
-            <p class="price">$19.99 <span class="old-price">$50</span></p>
-            <p class="store">Store Name & more</p>
-            <p class="rating">4.6 ★★★★☆ (12)</p>
-            <a href="#" target="_blank">BUY</a>
-        </div>
-        <!-- Repeat for other products -->
     </div>
     <div class="pagination" id="pagination"></div>
 
