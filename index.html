@@ -40,7 +40,7 @@
             padding: 20px;
             gap: 20px;
             background-color: #1a1a1a;
-            width: calc(4 * 220px + 3 * 20px); /* 4 cards + 3 gaps */
+            width: 100%; /* Use full width for scrolling */
         }
 
         .card {
@@ -49,9 +49,10 @@
             border-radius: 12px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             text-align: left;
-            width: 220px; /* Fixed width for each card */
+            width: calc(25% - 20px); /* 4 cards per row with gap */
             color: white;
             position: relative;
+            flex: 0 0 auto; /* Prevent shrinking */
         }
 
         .card img {
