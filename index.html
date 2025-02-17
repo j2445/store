@@ -163,13 +163,13 @@
 
         /* Footer Styles */
         .footer {
-            background-color: #333;
+            background-color: transparent; /* Remove background color */
             color: white;
             padding: 40px 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start; /* Align content to the left */
             flex-wrap: wrap;
-            margin-top: 40px; /* Added space above footer */
+            margin-top: 40px;
         }
 
         .footer-section {
@@ -184,18 +184,22 @@
             margin-bottom: 10px;
         }
 
-        .footer-section ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-section ul li {
+        .footer-section div {
             margin: 5px 0;
         }
 
-        .footer-section ul li a {
-            color: white;
+        .footer-section div a {
+            color: white; /* Change text color to white */
             text-decoration: none;
+            background-color: transparent; /* Remove background color */
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .footer-section div a:hover {
+            color: #ffd700; /* Change hover color to gold */
         }
 
         .footer-section input[type="email"] {
@@ -206,8 +210,9 @@
             width: calc(100% - 22px);
         }
 
-        .footer-section button {
-            background-color: gold; /* Change to gold */
+        .footer-section button,
+        .footer-section a button {
+            background-color: gold; /* Gold color */
             color: #333;
             border: none;
             padding: 10px;
@@ -215,9 +220,11 @@
             border-radius: 5px;
             cursor: pointer;
             transition: transform 0.3s ease, background-color 0.3s ease;
+            text-decoration: none;
         }
 
-        .footer-section button:hover {
+        .footer-section button:hover,
+        .footer-section a button:hover {
             transform: scale(1.1);
             background-color: #ffd700; /* Slightly darker gold on hover */
         }
@@ -382,6 +389,28 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
+        .subscribe-link {
+            display: inline-block;
+            color: gold; /* Change text color to gold */
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+            cursor: pointer; /* Add cursor pointer */
+        }
+
+        .subscribe-link:hover {
+            transform: scale(1.1);
+            color: #ffd700; /* Slightly darker gold on hover */
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -403,35 +432,47 @@
 
     <div class="footer">
         <div class="footer-section">
-            <h3>About Save Radar</h3>
-            <p>Your ultimate destination for the best deals and savings across Amazon. We help you find amazing discounts on products you love.</p>
+            <h3>About Us</h3>
+            <p>Discover the best deals and savings across Amazon. Follow us for amazing discounts.</p>
         </div>
         <div class="footer-section">
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="#">Today's Deals</a></li>
-                <li><a href="#">Best Sellers</a></li>
-                <li><a href="#">New Arrivals</a></li>
-                <li><a href="#">Deal Alerts</a></li>
-            </ul>
+            <h3>Resources</h3>
+            <div>
+                <a href="#">Blog</a>
+            </div>
+            <div>
+                <a href="#">FAQs</a>
+            </div>
+            <div>
+                <a href="#">Support</a>
+            </div>
+            <div>
+                <a href="#">Contact Us</a>
+            </div>
         </div>
         <div class="footer-section">
-            <h3>Categories</h3>
-            <ul>
-                <li><a href="#">Electronics</a></li>
-                <li><a href="#">Fashion</a></li>
-                <li><a href="#">Home & Kitchen</a></li>
-                <li><a href="#">Beauty & Personal Care</a></li>
-            </ul>
+            <h3>Explore</h3>
+            <div>
+                <a href="#">Electronics</a>
+            </div>
+            <div>
+                <a href="#">Fashion</a>
+            </div>
+            <div>
+                <a href="#">Home & Kitchen</a>
+            </div>
+            <div>
+                <a href="#">Beauty & Personal Care</a>
+            </div>
         </div>
         <div class="footer-section">
-            <h3>Newsletter</h3>
-            <p>Subscribe to get special offers, free giveaways, and amazing deals.</p>
+            <h3>Subscribe</h3>
+            <p>Get special offers, free giveaways, and amazing deals.</p>
             <input type="email" placeholder="Enter your email">
-            <button>Subscribe</button>
-            <a href="https://www.instagram.com/save_radar/" target="_blank">
-                <button>Follow us</button>
-            </a>
+            <div class="button-group">
+                <a href="#" class="subscribe-link">Subscribe</a>
+                <a href="https://www.instagram.com/save_radar/" target="_blank" class="subscribe-link">Instagram</a>
+            </div>
         </div>
         <div class="footer-bottom">
             <p>© 2025 Save Radar. All rights reserved.</p>
