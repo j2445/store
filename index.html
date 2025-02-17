@@ -568,26 +568,8 @@
         function subscribe() {
             const email = document.getElementById('popupEmail').value;
             if (email) {
-                fetch('https://script.google.com/macros/s/AKfycbzjPiIWFGZPj3pKRmCWR2S4agZLjS0sWAasaAEc5A1nTOcT03HiiyKhyYpEV4XwR-gE/exec', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email: email }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.result === 'success') {
-                        alert('Subscribed successfully!');
-                        closePopup();
-                    } else {
-                        alert('Subscription failed. Please try again.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Subscription failed. Please try again.');
-                });
+                alert(`Email entered: ${email}`);
+                closePopup();
             } else {
                 alert('Please enter a valid email address.');
             }
