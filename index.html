@@ -121,7 +121,7 @@
         }
 
         .card p {
-            margin: 5px 0;
+            margin: 10px 0; /* Increased margin for more space */
             font-size: 14px;
         }
 
@@ -133,7 +133,7 @@
         .card .rating {
             font-size: 14px;
             color: #ffeb3b;
-            margin-bottom: 10px; /* Add space below rating */
+            margin-bottom: 15px; /* Add more space below rating */
         }
 
         .pagination {
@@ -419,8 +419,7 @@
                         <img src="${image1}" alt="${title}">
                         <h3>${title}</h3>
                         <p class="price">${salePrice} <span class="old-price">${regularPrice}</span></p>
-                        <p class="store">${deal.store}</p>
-                        <p class="rating">${deal.savings} ★★★★☆ (${deal.savings.split(' ')[1]})</p>
+                        <p class="rating">★★★★☆</p>
                         <a href="${link}" target="_blank">BUY</a>
                     </div>
                 `;
