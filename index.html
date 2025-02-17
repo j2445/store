@@ -50,6 +50,10 @@
             text-align: left;
             color: white;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
         }
 
         .card img {
@@ -94,6 +98,12 @@
             display: block;
             margin-top: 10px;
             font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        a:hover {
+            transform: scale(1.1);
         }
 
         .card p {
