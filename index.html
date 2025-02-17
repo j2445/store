@@ -51,17 +51,23 @@
         }
 
         .card {
-            background: #333; /* Match footer background */
-            padding: 10px; /* Reduced padding */
-            border-radius: 8px; /* Slightly smaller border radius */
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+            background: linear-gradient(145deg, #444, #333); /* Gradient background */
+            padding: 15px; /* Slightly increased padding */
+            border-radius: 12px; /* More rounded corners */
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Deeper shadow */
             text-align: left;
-            color: white; /* Change text color to white */
+            color: white;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+        }
+
+        .card:hover {
+            transform: translateY(-10px); /* Lift effect on hover */
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
         }
 
         .card img {
@@ -72,13 +78,13 @@
         }
 
         .card h3 {
-            font-size: 14px; /* Adjusted font size */
+            font-size: 16px; /* Slightly larger font size */
             margin: 10px 0;
-            color: #333; /* Darker text color */
+            color: #fff; /* Ensure text is visible */
         }
 
         .price {
-            font-size: 16px; /* Adjusted font size */
+            font-size: 18px; /* Larger font size */
             color: #4caf50;
             font-weight: bold;
         }
@@ -86,7 +92,7 @@
         .old-price {
             text-decoration: line-through;
             color: #f44336;
-            margin-left: 5px; /* Reduced margin */
+            margin-left: 5px;
         }
 
         .discount {
@@ -290,31 +296,22 @@
             align-items: center;
         }
 
-        .spinner {
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #3498db;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         .loading-text {
             color: white;
-            font-size: 18px;
+            font-size: 24px; /* Increased font size */
             margin-top: 20px;
             text-align: center;
+            animation: fadeInOut 1s infinite; /* Add animation */
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
     <div id="preloader">
-        <div class="spinner"></div>
         <div class="loading-text">LOADING...</div>
     </div>
     <h1>
