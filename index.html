@@ -1,547 +1,676 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SaveRadar - Deals</title>
-    <link rel="icon" href="https://i.ibb.co/hxz6WY7g/logo-new.png" type="image/x-icon">
+    <link
+      rel="icon"
+      href="https://i.ibb.co/hxz6WY7g/logo-new.png"
+      type="image/x-icon"
+    />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0; /* Remove body margin */
-            padding: 0; /* Remove body padding */
-            background: #333; /* Match footer background */
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0; /* Remove body margin */
+        padding: 0; /* Remove body padding */
+        background: #333; /* Match footer background */
+        cursor: none;
+      }
 
-        h1 {
-            text-align: left; /* Align text to the left */
-            margin: 20px; /* Adjust margin for spacing */
-            font-size: 36px; /* Increase font size */
-            font-weight: bold;
-            color: white; /* Change text color to white */
-            display: flex;
-            align-items: center;
-        }
+      .cursor {
+    position: fixed;  /* Ensures the cursor stays with the mouse on scroll */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000; /* Ensures it stays above other content */
+}
 
-        h1 img {
-            margin-right: 10px; /* Space between icon and text */
-            width: 40px; /* Set icon width */
-            height: auto; /* Maintain aspect ratio */
-        }
+.cursor {
+    width: 20px;
+    height: 20px;
+    background-color: #15ff00;
+    mix-blend-mode: difference;
+}
 
-        .filter-container {
-            text-align: left; /* Align the filter to the left */
-            margin-left: 40px; /* Add left margin for spacing */
-            margin-bottom: 20px;
-        }
 
-        .filter-container select {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
 
+      h1 {
+        text-align: left; /* Align text to the left */
+        margin: 20px; /* Adjust margin for spacing */
+        font-size: 36px; /* Increase font size */
+        font-weight: bold;
+        color: white; /* Change text color to white */
+        display: flex;
+        align-items: center;
+      }
+
+      h1 img {
+        margin-right: 10px; /* Space between icon and text */
+        width: 40px; /* Set icon width */
+        height: auto; /* Maintain aspect ratio */
+      }
+    
+      content {
+       
+        margin-left: 30%;
+        font-size: 50px; /* Increase font size */
+        font-weight: bold;
+        color: white; /* Change text color to white */
+        align-items: center;
+        width: 40px;
+        height: auto;
+        
+      }
+
+
+      .filter-container {
+        text-align: left; /* Align the filter to the left */
+        margin-left: 40px; /* Add left margin for spacing */
+        margin-bottom: 20px;
+      }
+
+      .disclaimer {
+        text-align: center;
+        font-size: 20px;
+        margin: 20px 50px;
+        color: white;
+        text-align: justify center;
+    
+      }
+
+      .filter-container select {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* 5 products per row */
+        gap: 20px; /* Increased gap between cards */
+        padding: 20px;
+        background-color: #333;
+      }
+
+      .card {
+        background: linear-gradient(
+          145deg,
+          #444,
+          #333
+        ); /* Gradient background */
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        text-align: left;
+        color: white;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-10px); /* Lift effect on hover */
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
+      }
+
+      .card img {
+        width: 100%;
+        height: 200px; /* Fixed height for uniformity */
+        border-radius: 8px;
+        object-fit: cover; /* Ensures images cover the area */
+      }
+
+      .card h3 {
+        font-size: 20px;
+        margin: 10px 0 5px; /* Reduced gap below title */
+        color: #fff;
+      }
+
+      .price {
+        font-size: 20px;
+        color: #4caf50;
+      }
+
+      .old-price {
+        text-decoration: line-through;
+        color: #f44336;
+        margin-left: 5px;
+        font-size: 20px;
+      }
+
+      .discount {
+        background: #f44336;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+
+      a {
+        text-decoration: none;
+        color: #fff; /* Change text color to white */
+        background-color: #2196f3; /* Button background color */
+        padding: 10px;
+        border-radius: 5px;
+        display: block;
+        margin-top: auto; /* Push button to the bottom */
+        font-weight: bold;
+        text-align: center;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+
+      a:hover {
+        transform: scale(1.1);
+        background-color: #1e88e5; /* Darker shade on hover */
+      }
+
+      .card p {
+        margin: 0 0; /* Increased margin for more space */
+        font-size: 14px;
+      }
+
+      .card .store {
+        font-size: 12px;
+        color: #bbb;
+      }
+
+      .card .rating {
+        font-size: 20px;
+        color: #ffeb3b;
+        margin-bottom: 0; /* Add more space below rating */
+      }
+
+      .pagination {
+        text-align: center;
+        margin-top: 40px; /* Increased space above pagination */
+        margin-bottom: 40px; /* Added space below pagination */
+      }
+
+      .pagination button {
+        background: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        margin: 0 5px;
+        cursor: pointer;
+      }
+
+      .pagination button.disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+
+      /* Footer Styles */
+      .footer {
+        background-color: transparent; /* Remove background color */
+        color: white;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: flex-start; /* Align content to the left */
+        flex-wrap: wrap;
+        margin-top: 40px;
+      }
+
+      .footer-section {
+        flex: 1;
+        min-width: 200px;
+        margin: 10px;
+      }
+
+      .footer-section h3 {
+        border-bottom: 2px solid yellow;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+      }
+
+      .footer-section div {
+        margin: 5px 0;
+      }
+
+      .footer-section div a {
+        color: white; /* Change text color to white */
+        text-decoration: none;
+        background-color: transparent; /* Remove background color */
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+
+      .footer-section div a:hover {
+        color: #ffd700; /* Change hover color to gold */
+      }
+
+      .footer-section input[type="email"] {
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: none;
+        width: calc(100% - 22px);
+      }
+
+      .footer-section button,
+      .footer-section a button {
+        background-color: gold; /* Gold color */
+        color: #333;
+        border: none;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        text-decoration: none;
+      }
+
+      .footer-section button:hover,
+      .footer-section a button:hover {
+        transform: scale(1.1);
+        background-color: #ffd700; /* Slightly darker gold on hover */
+      }
+
+      .footer-bottom {
+        text-align: center;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      /* Mobile view adjustments for 2 rows and 4 products per row */
+      @media (max-width: 768px) {
         .container {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5 products per row */
-            gap: 30px; /* Increased gap between cards */
-            padding: 20px;
-            background-color: #333;
+          grid-template-columns: repeat(
+            4,
+            1fr
+          ); /* 4 products per row on mobile */
         }
 
         .card {
-            background: linear-gradient(145deg, #444, #333); /* Gradient background */
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-            text-align: left;
-            color: white;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px); /* Lift effect on hover */
-            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
+          width: 100%;
         }
 
         .card img {
-            width: 100%;
-            height: 200px; /* Fixed height for uniformity */
-            border-radius: 8px;
-            object-fit: cover; /* Ensures images cover the area */
+          width: 80px;
+          height: 80px;
         }
 
         .card h3 {
-            font-size: 16px;
-            margin: 10px 0 5px; /* Reduced gap below title */
-            color: #fff;
+          font-size: 14px;
         }
 
-        .price {
-            font-size: 18px; /* Larger font size */
-            color: #4caf50;
-            font-weight: bold;
-        }
-
+        .price,
         .old-price {
-            text-decoration: line-through;
-            color: #f44336;
-            margin-left: 5px;
+          font-size: 12px;
         }
 
         .discount {
-            background: #f44336;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            position: absolute;
-            top: 10px;
-            left: 10px;
+          font-size: 12px;
+        }
+
+        .container {
+          padding: 0 5px;
+        }
+
+        h1 {
+          font-size: 22px;
+          margin-top: 10px;
+        }
+      }
+
+      /* Extra small devices (phones in portrait mode) */
+      @media (max-width: 480px) {
+        .container {
+          grid-template-columns: repeat(2, 1fr); /* 2 products per row */
+        }
+
+        .card img {
+          width: 60px;
+          height: 60px;
+        }
+
+        .card h3 {
+          font-size: 12px;
+        }
+
+        .price,
+        .old-price {
+          font-size: 10px;
+        }
+
+        .discount {
+          font-size: 10px;
         }
 
         a {
-            text-decoration: none;
-            color: #fff; /* Change text color to white */
-            background-color: #2196f3; /* Button background color */
-            padding: 10px;
-            border-radius: 5px;
-            display: block;
-            margin-top: auto; /* Push button to the bottom */
-            font-weight: bold;
-            text-align: center;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+          padding: 6px;
+          font-size: 12px;
         }
+      }
 
-        a:hover {
-            transform: scale(1.1);
-            background-color: #1e88e5; /* Darker shade on hover */
+      #preloader {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background-color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .loading-text {
+        color: white;
+        font-size: 24px; /* Increased font size */
+        margin-top: 20px;
+        text-align: center;
+        animation: fadeInOut 1s infinite; /* Add animation */
+      }
+
+      @keyframes fadeInOut {
+        0%,
+        100% {
+          opacity: 0;
         }
-
-        .card p {
-            margin: 10px 0; /* Increased margin for more space */
-            font-size: 14px;
+        50% {
+          opacity: 1;
         }
+      }
 
-        .card .store {
-            font-size: 12px;
-            color: #bbb;
+      .popup {
+        display: none; /* Hidden by default */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .popup-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        width: 300px;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      .popup-content h2 {
+        margin-top: 0;
+      }
+
+      .popup-content input[type="email"] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .popup-content button {
+        background-color: #2196f3;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+
+      .popup-content button:hover {
+        transform: scale(1.1);
+        background-color: #1e88e5;
+      }
+
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
-
-        .card .rating {
-            font-size: 14px;
-            color: #ffeb3b;
-            margin-bottom: 15px; /* Add more space below rating */
+        to {
+          opacity: 1;
         }
+      }
 
-        .pagination {
-            text-align: center;
-            margin-top: 40px; /* Increased space above pagination */
-            margin-bottom: 40px; /* Added space below pagination */
-        }
+      .subscribe-link {
+        display: inline-block;
+        color: gold; /* Change text color to gold */
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: transform 0.3s ease, color 0.3s ease;
+        cursor: pointer; /* Add cursor pointer */
+      }
 
-        .pagination button {
-            background: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            margin: 0 5px;
-            cursor: pointer;
-        }
+      .subscribe-link:hover {
+        transform: scale(1.1);
+        color: #ffd700; /* Slightly darker gold on hover */
+      }
 
-        .pagination button.disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        /* Footer Styles */
-        .footer {
-            background-color: transparent; /* Remove background color */
-            color: white;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: flex-start; /* Align content to the left */
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .footer-section {
-            flex: 1;
-            min-width: 200px;
-            margin: 10px;
-        }
-
-        .footer-section h3 {
-            border-bottom: 2px solid yellow;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-        }
-
-        .footer-section div {
-            margin: 5px 0;
-        }
-
-        .footer-section div a {
-            color: white; /* Change text color to white */
-            text-decoration: none;
-            background-color: transparent; /* Remove background color */
-            padding: 10px;
-            border-radius: 5px;
-            display: inline-block;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        .footer-section div a:hover {
-            color: #ffd700; /* Change hover color to gold */
-        }
-
-        .footer-section input[type="email"] {
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            border: none;
-            width: calc(100% - 22px);
-        }
-
-        .footer-section button,
-        .footer-section a button {
-            background-color: gold; /* Gold color */
-            color: #333;
-            border: none;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            text-decoration: none;
-        }
-
-        .footer-section button:hover,
-        .footer-section a button:hover {
-            transform: scale(1.1);
-            background-color: #ffd700; /* Slightly darker gold on hover */
-        }
-
-        .footer-bottom {
-            text-align: center;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        /* Mobile view adjustments for 2 rows and 4 products per row */
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: repeat(4, 1fr); /* 4 products per row on mobile */
-            }
-
-            .card {
-                width: 100%;
-            }
-
-            .card img {
-                width: 80px;
-                height: 80px;
-            }
-
-            .card h3 {
-                font-size: 14px;
-            }
-
-            .price, .old-price {
-                font-size: 12px;
-            }
-
-            .discount {
-                font-size: 12px;
-            }
-
-            .container {
-                padding: 0 5px;
-            }
-
-            h1 {
-                font-size: 22px;
-                margin-top: 10px;
-            }
-        }
-
-        /* Extra small devices (phones in portrait mode) */
-        @media (max-width: 480px) {
-            .container {
-                grid-template-columns: repeat(2, 1fr); /* 2 products per row */
-            }
-
-            .card img {
-                width: 60px;
-                height: 60px;
-            }
-
-            .card h3 {
-                font-size: 12px;
-            }
-
-            .price, .old-price {
-                font-size: 10px;
-            }
-
-            .discount {
-                font-size: 10px;
-            }
-
-            a {
-                padding: 6px;
-                font-size: 12px;
-            }
-        }
-
-        #preloader {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            background-color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .loading-text {
-            color: white;
-            font-size: 24px; /* Increased font size */
-            margin-top: 20px;
-            text-align: center;
-            animation: fadeInOut 1s infinite; /* Add animation */
-        }
-
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        .popup {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .popup-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            width: 300px;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .popup-content h2 {
-            margin-top: 0;
-        }
-
-        .popup-content input[type="email"] {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .popup-content button {
-            background-color: #2196f3;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin-top: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        .popup-content button:hover {
-            transform: scale(1.1);
-            background-color: #1e88e5;
-        }
-
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .subscribe-link {
-            display: inline-block;
-            color: gold; /* Change text color to gold */
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: transform 0.3s ease, color 0.3s ease;
-            cursor: pointer; /* Add cursor pointer */
-        }
-
-        .subscribe-link:hover {
-            transform: scale(1.1);
-            color: #ffd700; /* Slightly darker gold on hover */
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px; /* Space between buttons */
-            margin-top: 10px;
-        }
+      .button-group {
+        display: flex;
+        gap: 10px; /* Space between buttons */
+        margin-top: 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
     <div id="preloader">
-        <div class="loading-text">LOADING...</div>
+      <div class="loading-text">LOADING...</div>
     </div>
     <h1>
-        <img src="https://i.ibb.co/hxz6WY7g/logo-new.png" alt="SaveRadar Logo">
-        SaveRadar
+      <img src="https://i.ibb.co/hxz6WY7g/logo-new.png" alt="SaveRadar Logo" />
+      SaveRadar
     </h1>
+      <content>Welcome to Save Radar</content>
+
+    <div class="disclaimer">
+        Say goodbye to endless searching and hello to effortless savings.
+        Whether you're hunting for electronics, fashion, home goods, or anything
+        in between, Save Radar has you covered. Join us and discover a new way
+        to shop smartly and efficiently.
+        <br>
+        <br>
+      !!!When you buy through links on saveradar.com we may earn a
+      commission.!!!
+      <br>
+      <br>
+    </div>
     <div class="filter-container">
-        <select id="categoryFilter" onchange="filterCategory()">
-            <option value="">All Categories</option>
-        </select>
+      <select id="categoryFilter" onchange="filterCategory()">
+        <option value="">All Categories</option>
+      </select>
     </div>
-    <div class="container" id="deals-container">
-    </div>
+    <div class="container" id="deals-container"></div>
+    <br>
     <div class="pagination" id="pagination"></div>
 
     <div class="footer">
-        <div class="footer-section">
-            <h3>About Us</h3>
-            <p>Discover the best deals and savings across Amazon. Follow us for amazing discounts.</p>
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>
+          Discover the best deals and savings across Amazon. Follow us for
+          amazing discounts.
+        </p>
+      </div>
+      <div class="footer-section">
+        <h3>Resources</h3>
+        <div>
+          <a href="#">Blog</a>
         </div>
-        <div class="footer-section">
-            <h3>Resources</h3>
-            <div>
-                <a href="#">Blog</a>
-            </div>
-            <div>
-                <a href="#">FAQs</a>
-            </div>
-            <div>
-                <a href="#">Support</a>
-            </div>
-            <div>
-                <a href="#">Contact Us</a>
-            </div>
+        <div>
+          <a href="#">FAQs</a>
         </div>
-        <div class="footer-section">
-            <h3>Explore</h3>
-            <div>
-                <a href="#">Electronics</a>
-            </div>
-            <div>
-                <a href="#">Fashion</a>
-            </div>
-            <div>
-                <a href="#">Home & Kitchen</a>
-            </div>
-            <div>
-                <a href="#">Beauty & Personal Care</a>
-            </div>
+        <div>
+          <a href="#">Support</a>
         </div>
-        <div class="footer-section">
-            <h3>Subscribe</h3>
-            <p>Get special offers, free giveaways, and amazing deals.</p>
-            <input type="email" placeholder="Enter your email">
-            <div class="button-group">
-                <a href="#" class="subscribe-link">Subscribe</a>
-                <a href="https://www.instagram.com/save_radar/" target="_blank" class="subscribe-link">Instagram</a>
-            </div>
+        <div>
+          <a href="#">Contact Us</a>
         </div>
-        <div class="footer-bottom">
-            <p>© 2025 Save Radar. All rights reserved.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Explore</h3>
+        <div>
+          <a href="#">Electronics</a>
         </div>
+        <div>
+          <a href="#">Fashion</a>
+        </div>
+        <div>
+          <a href="#">Home & Kitchen</a>
+        </div>
+        <div>
+          <a href="#">Beauty & Personal Care</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Subscribe</h3>
+        <p>Get special offers, free giveaways, and amazing deals.</p>
+        <input type="email" placeholder="Enter your email" />
+        <div class="button-group">
+          <a href="#" class="subscribe-link">Subscribe</a>
+          <a
+            href="https://www.instagram.com/save_radar/"
+            target="_blank"
+            class="subscribe-link"
+            >Instagram</a
+          >
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Save Radar. All rights reserved.</p>
+      </div>
     </div>
 
     <!-- Email Popup -->
     <div id="emailPopup" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h2>Subscribe to our Newsletter</h2>
-            <p>Enter your email to receive the latest deals and offers!</p>
-            <input type="email" placeholder="Enter your email" id="popupEmail">
-            <button onclick="subscribe()">Subscribe</button>
-            <button onclick="closePopup()">Close</button>
-        </div>
+      <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h2>Subscribe to our Newsletter</h2>
+        <p>Enter your email to receive the latest deals and offers!</p>
+        <input type="email" placeholder="Enter your email" id="popupEmail" />
+        <button onclick="subscribe()">Subscribe</button>
+        <button onclick="closePopup()">Close</button>
+      </div>
     </div>
 
     <script>
-        const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQHnHu0HrvLs3a7TrYvc90IDAZC72BO4ciXOSG6HkfkIhCtHhNRNtRGbzJM0Vue-W04VWGcLjo4IKgN/pub?output=csv';
-        let currentPage = 1;
-        const itemsPerPage = 100;
-        let allDeals = [];
-        let filteredDeals = [];
-        let categories = [];
+     const cursor = document.querySelector(".cursor");
+const follower = document.querySelector(".cursor-follower");
 
-        async function fetchDeals() {
-            try {
-                const response = await fetch(sheetURL);
-                const data = await response.text();
-                const rows = data.split('\n').slice(1);
-                allDeals = rows.map(row => {
-                    const cols = row.replace(/\r/g, '').split(',');
-                    if (cols.length < 10) return null;
-                    let [id, category, store, title, salePrice, regularPrice, savings, discount, image1, link] = cols.map(col => col.trim());
-                    if (category && !categories.includes(category)) {
-                        categories.push(category);
-                    }
-                    return { id, category, store, title, salePrice, regularPrice, savings, discount, image1, link };
-                }).filter(deal => deal !== null);
+document.addEventListener("mousemove", (e) => {
+    let x = e.clientX;
+    let y = e.clientY;
 
-                populateCategoryFilter();
-                filteredDeals = [...allDeals];
-                renderDeals();
-                renderPagination();
-            } catch (error) {
-                console.error("Error fetching the deals:", error);
-            }
+    // Apply precise positioning
+    cursor.style.left = `${x}px`;
+    cursor.style.top = `${y}px`;
+    
+    follower.style.left = `${x}px`;
+    follower.style.top = `${y}px`;
+});
+
+    </script>
+
+    <script>
+      const sheetURL =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQHnHu0HrvLs3a7TrYvc90IDAZC72BO4ciXOSG6HkfkIhCtHhNRNtRGbzJM0Vue-W04VWGcLjo4IKgN/pub?output=csv";
+      let currentPage = 1;
+      const itemsPerPage = 100;
+      let allDeals = [];
+      let filteredDeals = [];
+      let categories = [];
+
+      async function fetchDeals() {
+        try {
+          const response = await fetch(sheetURL);
+          const data = await response.text();
+          const rows = data.split("\n").slice(1);
+          allDeals = rows
+            .map((row) => {
+              const cols = row.replace(/\r/g, "").split(",");
+              if (cols.length < 10) return null;
+              let [
+                id,
+                category,
+                store,
+                title,
+                salePrice,
+                regularPrice,
+                savings,
+                discount,
+                image1,
+                link,
+              ] = cols.map((col) => col.trim());
+              if (category && !categories.includes(category)) {
+                categories.push(category);
+              }
+              return {
+                id,
+                category,
+                store,
+                title,
+                salePrice,
+                regularPrice,
+                savings,
+                discount,
+                image1,
+                link,
+              };
+            })
+            .filter((deal) => deal !== null);
+
+          populateCategoryFilter();
+          filteredDeals = [...allDeals];
+          renderDeals();
+          renderPagination();
+        } catch (error) {
+          console.error("Error fetching the deals:", error);
         }
+      }
 
-        function populateCategoryFilter() {
-            const categoryFilter = document.getElementById('categoryFilter');
-            categories.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category;
-                option.textContent = category;
-                categoryFilter.appendChild(option);
-            });
-        }
+      function populateCategoryFilter() {
+        const categoryFilter = document.getElementById("categoryFilter");
+        categories.forEach((category) => {
+          const option = document.createElement("option");
+          option.value = category;
+          option.textContent = category;
+          categoryFilter.appendChild(option);
+        });
+      }
 
-        function renderDeals() {
-            const start = (currentPage - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const dealsToShow = filteredDeals.slice(start, end);
-            let dealsHTML = '';
+      function renderDeals() {
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const dealsToShow = filteredDeals.slice(start, end);
+        let dealsHTML = "";
 
-            dealsToShow.forEach(deal => {
-                const { image1, title, salePrice, regularPrice, discount, link } = deal;
-                dealsHTML += `
+        dealsToShow.forEach((deal) => {
+          const { image1, title, salePrice, regularPrice, discount, link } =
+            deal;
+          dealsHTML += `
                     <div class="card">
                         <div class="discount">${discount}</div>
                         <img src="${image1}" alt="${title}">
@@ -551,73 +680,82 @@
                         <a href="${link}" target="_blank">BUY</a>
                     </div>
                 `;
-            });
-            document.getElementById('deals-container').innerHTML = dealsHTML;
-            window.scrollTo(0, 0);
-        }
-
-        function renderPagination() {
-            const pageCount = Math.ceil(filteredDeals.length / itemsPerPage);
-            let paginationHTML = '';
-
-            if (currentPage > 1) {
-                paginationHTML += `<button onclick="changePage(${currentPage - 1})">Previous</button>`;
-            }
-
-            for (let i = 1; i <= pageCount; i++) {
-                paginationHTML += `<button onclick="changePage(${i})" ${i === currentPage ? 'disabled' : ''}>${i}</button>`;
-            }
-
-            if (currentPage < pageCount) {
-                paginationHTML += `<button onclick="changePage(${currentPage + 1})">Next</button>`;
-            }
-
-            document.getElementById('pagination').innerHTML = paginationHTML;
-        }
-
-        function changePage(page) {
-            currentPage = page;
-            renderDeals();
-            renderPagination();
-        }
-
-        function filterCategory() {
-            const selectedCategory = document.getElementById('categoryFilter').value;
-            if (selectedCategory) {
-                filteredDeals = allDeals.filter(deal => deal.category === selectedCategory);
-            } else {
-                filteredDeals = [...allDeals];
-            }
-            currentPage = 1;
-            renderDeals();
-            renderPagination();
-        }
-
-        fetchDeals();
-
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('preloader').style.display = 'none';
-            }, 2000); // 2 seconds
-
-            setTimeout(function() {
-                document.getElementById('emailPopup').style.display = 'flex';
-            }, 5000); // 5 seconds
         });
+        document.getElementById("deals-container").innerHTML = dealsHTML;
+        window.scrollTo(0, 0);
+      }
 
-        function closePopup() {
-            document.getElementById('emailPopup').style.display = 'none';
+      function renderPagination() {
+        const pageCount = Math.ceil(filteredDeals.length / itemsPerPage);
+        let paginationHTML = "";
+
+        if (currentPage > 1) {
+          paginationHTML += `<button onclick="changePage(${
+            currentPage - 1
+          })">Previous</button>`;
         }
 
-        function subscribe() {
-            const email = document.getElementById('popupEmail').value;
-            if (email) {
-                alert(`Email entered: ${email}`);
-                closePopup();
-            } else {
-                alert('Please enter a valid email address.');
-            }
+        for (let i = 1; i <= pageCount; i++) {
+          paginationHTML += `<button onclick="changePage(${i})" ${
+            i === currentPage ? "disabled" : ""
+          }>${i}</button>`;
         }
+
+        if (currentPage < pageCount) {
+          paginationHTML += `<button onclick="changePage(${
+            currentPage + 1
+          })">Next</button>`;
+        }
+
+        document.getElementById("pagination").innerHTML = paginationHTML;
+      }
+
+      function changePage(page) {
+        currentPage = page;
+        renderDeals();
+        renderPagination();
+      }
+
+      function filterCategory() {
+        const selectedCategory =
+          document.getElementById("categoryFilter").value;
+        if (selectedCategory) {
+          filteredDeals = allDeals.filter(
+            (deal) => deal.category === selectedCategory
+          );
+        } else {
+          filteredDeals = [...allDeals];
+        }
+        currentPage = 1;
+        renderDeals();
+        renderPagination();
+      }
+
+      fetchDeals();
+
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          document.getElementById("preloader").style.display = "none";
+        }, 2000); // 2 seconds
+
+        setTimeout(function () {
+          document.getElementById("emailPopup").style.display = "flex";
+        }, 5000); // 5 seconds
+      });
+
+      function closePopup() {
+        document.getElementById("emailPopup").style.display = "none";
+      }
+
+      function subscribe() {
+        const email = document.getElementById("popupEmail").value;
+        if (email) {
+          alert(`Email entered: ${email}`);
+          closePopup();
+        } else {
+          alert("Please enter a valid email address.");
+        }
+      }
     </script>
-</body>
+  </body>
 </html>
