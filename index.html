@@ -109,8 +109,8 @@
     }
 
     .brand-logo {
-      width: 60px;
-      height: 60px;
+      width: 120px;
+      height: auto;
       margin-bottom: 20px;
       animation: pulse 2s infinite;
     }
@@ -291,10 +291,9 @@
       text-align: left;
       margin: 0 20px 20px 20px;
       display: flex;
-      align-items: center;
+      align-items: left;
       gap: 20px;
-      width: auto;
-      max-width: 100%;
+      width: 200px;
       box-sizing: border-box;
     }
 
@@ -307,12 +306,12 @@
       background: #444;
       color: white;
       width: 200px;
-      max-width: 100%;
+      max-width: auto;
       box-sizing: border-box;
     }
 
     .filter-container input {
-      width: 300px;
+      width: auto;
       max-width: 100%;
     }
 
@@ -329,6 +328,7 @@
       font-size: 16px;
       border-radius: 5px;
       border: 1px solid #ccc;
+      max-width: auto;
     }
 
     .container {
@@ -998,29 +998,137 @@
 <body>
 
   <div id="preloader">
-    <img src="https://i.ibb.co/hxz6WY7g/logo-new.png" class="brand-logo" alt="Logo">
+    <svg width="600" height="100" viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Gradient for the text -->
+        <linearGradient id="textGradient" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ffffff" />
+          <stop offset="100%" stop-color="#007BFF" />
+        </linearGradient>
+      </defs>
+
+      <!-- Centered Text with each letter animated -->
+      <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif"
+        font-size="60" font-weight="bold" fill="url(#textGradient)">
+        <tspan opacity="0">
+          S
+          <animate attributeName="opacity" from="0" to="1" begin="0s" dur="0.2s" fill="freeze" />
+        </tspan>
+        <tspan opacity="0">
+          A
+          <animate attributeName="opacity" from="0" to="1" begin="0.3s" dur="0.2s" fill="freeze" />
+        </tspan>
+        <tspan opacity="0">
+          V
+          <animate attributeName="opacity" from="0" to="1" begin="0.6s" dur="0.2s" fill="freeze" />
+        </tspan>
+        <tspan opacity="0">
+          E
+          <animate attributeName="opacity" from="0" to="1" begin="0.9s" dur="0.2s" fill="freeze" />
+        </tspan>
+        <tspan dx="10" opacity="0">
+          R
+          <animate attributeName="opacity" from="0" to="1" begin="1.2s" dur="0.2s" fill="freeze" />
+        </tspan>
+        <tspan opacity="0">
+          A
+          <animate attributeName="opacity" from="0" to="1" begin="1.5s" dur="0.2s" fill="freeze" />
+        </tspan>
+        <tspan opacity="0">
+          D
+          <animate attributeName="opacity" from="0" to="1" begin="1.8s" dur="0.2s" fill="freeze" />
+        </tspan>
+        <tspan opacity="0">
+          A
+          <animate attributeName="opacity" from="0" to="1" begin="2.1s" dur="0.2s" fill="freeze" />
+        </tspan>
+        <tspan opacity="0">
+          R
+          <animate attributeName="opacity" from="0" to="1" begin="2.4s" dur="0.2s" fill="freeze" />
+        </tspan>
+      </text>
+    </svg>
+
+
+
     <div class="loader">
       <div class="loader-inner"></div>
     </div>
     <div class="loading-text">Scanning Deals</div>
   </div>
-  <h1>
+  <h1 href="#" onclick="window.location.reload();">
     <img src="https://i.ibb.co/hxz6WY7g/logo-new.png" alt="SaveRadar Logo" />
-    SaveRadar
+
+    <b style="
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #ffcc00;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+  ">
+      丂尺
+    </b>
   </h1>
-  <content>Welcome to Save Radar</content>
+  <content style="
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #36378f;
+  letter-spacing: 3px;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  border-right: 2px solid #ffcc00;
+  animation: typing 3s steps(20) forwards, blink 0.6s infinite alternate;
+">ωєℓ¢σмє тσ ѕανє яα∂αя</content>
 
   <div class="disclaimer">
-    Say goodbye to endless searching and hello to effortless savings. Whether
-    you're hunting for electronics, fashion, home goods, or anything in
-    between, Save Radar has you covered. Join us and discover a new way to
-    shop smartly and efficiently.
+    ꜱᴀʏ ɢᴏᴏᴅʙʏᴇ ᴛᴏ ᴇɴᴅʟᴇꜱꜱ ꜱᴇᴀʀᴄʜɪɴɢ ᴀɴᴅ ʜᴇʟʟᴏ ᴛᴏ ᴇꜰꜰᴏʀᴛʟᴇꜱꜱ ꜱᴀᴠɪɴɢꜱ. ᴡʜᴇᴛʜᴇʀ ʏᴏᴜ'ʀᴇ ʜᴜɴᴛɪɴɢ ꜰᴏʀ ᴇʟᴇᴄᴛʀᴏɴɪᴄꜱ, ꜰᴀꜱʜɪᴏɴ,
+    ʜᴏᴍᴇ ɢᴏᴏᴅꜱ, ᴏʀ ᴀɴʏᴛʜɪɴɢ ɪɴ ʙᴇᴛᴡᴇᴇɴ, ꜱᴀᴠᴇ ʀᴀᴅᴀʀ ʜᴀꜱ ʏᴏᴜ ᴄᴏᴠᴇʀᴇᴅ. ᴊᴏɪɴ ᴜꜱ ᴀɴᴅ ᴅɪꜱᴄᴏᴠᴇʀ ᴀ ɴᴇᴡ ᴡᴀʏ ᴛᴏ ꜱʜᴏᴘ ꜱᴍᴀʀᴛʟʏ ᴀɴᴅ
+    ᴇꜰꜰɪᴄɪᴇɴᴛʟʏ.
     <br />
     <br />
-    !!!When you buy through links on saveradar.com we may earn a
-    commission.!!!
+    ─═✧✧═─ 𝕎𝕙𝕖𝕟 𝕪𝕠𝕦 𝕓𝕦𝕪 𝕥𝕙𝕣𝕠𝕦𝕘𝕙 𝕝𝕚𝕟𝕜𝕤 𝕠𝕟 𝕤𝕒𝕧𝕖𝕣𝕒𝕕𝕒𝕣.𝕔𝕠𝕞 𝕨𝕖 𝕞𝕒𝕪 𝕖𝕒𝕣𝕟 𝕒
+    𝕔𝕠𝕞𝕞𝕚𝕤𝕤𝕚𝕠𝕟 ─═✧✧═─
     <br />
     <br />
+
+    <div style="overflow: hidden; white-space: nowrap; position: relative; width: 100%;">
+      <div id="scroller" style="display: flex; width: max-content; animation: scrollX 10s linear infinite;">
+    <img src="https://files.oaiusercontent.com/file-B77vNS8p4WgLUXwQSKyPk1?se=2025-02-19T13%3A45%3A21Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D4f7c5a21-6f5d-49a2-b4fd-25efce91956e.webp&sig=iFM5dlz0FzZ5b6%2B02cWilXLjJs9nknT%2BAyRQKZcxaZs%3D" style="width: 300px; margin-right: 10px;">
+    <img src="https://files.oaiusercontent.com/file-4QKznC2FN871mPqEkiaK2H?se=2025-02-19T13%3A46%3A23Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D07081e13-85c9-4a00-bee5-7439e4ac7bef.webp&sig=Mju1/K5rgYBGRdegnbVn/WNMJvY555jlrZrKcmdS51Y%3D" style="width: 300px; margin-right: 10px;">
+    <img src="https://files.oaiusercontent.com/file-JYzYNG99gNtExtBNBnqiaM?se=2025-02-19T13%3A48%3A39Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D104d6835-a4eb-4e4f-be0d-4fc4cd60b667.webp&sig=yI84xwxElJdin2EJOVWRXdknCzWMslxA/ohzhsccL68%3D" style="width: 300px; margin-right: 10px;">
+    <img src="https://files.oaiusercontent.com/file-7kWDVdhNbqu5A75379fQyE?se=2025-02-19T13%3A49%3A39Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D73e3fab9-fb5e-44a3-8fd4-ed959ad89bef.webp&sig=BVJy0zP4tJrggc%2BdHzhxegslgfGc1c2LbUacbVMFpDc%3D" style="width: 300px; margin-right: 10px;">
+    <img src="https://files.oaiusercontent.com/file-TqsLMXB8JDbrV9ug2mgnNL?se=2025-02-19T13%3A51%3A40Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dc7eff773-faee-4b34-96d2-20d1ed99002f.webp&sig=XG/OqeAeS1FbByCluYnCjy7dLyS%2BVI%2BPQK/QpPpvVvg%3D" style="width: 300px; margin-right: 10px;">
+    <img src="https://files.oaiusercontent.com/file-SLwNnaXnW1SCFKC9QdznHp?se=2025-02-19T13%3A49%3A53Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dbc928fb5-eceb-48c1-b180-db0149bcde22.webp&sig=PRQJAbSZ0WCuH4U%2B0FZTTRbRF9DkNkPaKFloDL6OEIQ%3D" style="width: 300px; margin-right: 10px;">
+    <img src="https://files.oaiusercontent.com/file-W2QaJSsWiDYXmy6TL2c6yi?se=2025-02-19T13%3A52%3A48Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D0f711ca0-7191-468e-b1b7-a3d0e80843c0.webp&sig=0LZGRgytMG975l9BbeKnATEZ43d36VfzhwUVqnJDmZY%3D" style="width: 300px; margin-right: 10px;">
+  
+    <img src="https://files.oaiusercontent.com/file-B77vNS8p4WgLUXwQSKyPk1?se=2025-02-19T13%3A45%3A21Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D4f7c5a21-6f5d-49a2-b4fd-25efce91956e.webp&sig=iFM5dlz0FzZ5b6%2B02cWilXLjJs9nknT%2BAyRQKZcxaZs%3D" style="width: 300px; margin-right: 10px;">
+    <img src="https://files.oaiusercontent.com/file-4QKznC2FN871mPqEkiaK2H?se=2025-02-19T13%3A46%3A23Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D07081e13-85c9-4a00-bee5-7439e4ac7bef.webp&sig=Mju1/K5rgYBGRdegnbVn/WNMJvY555jlrZrKcmdS51Y%3D" style="width: 300px; margin-right: 10px;">
+    <img src="https://files.oaiusercontent.com/file-JYzYNG99gNtExtBNBnqiaM?se=2025-02-19T13%3A48%3A39Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D104d6835-a4eb-4e4f-be0d-4fc4cd60b667.webp&sig=yI84xwxElJdin2EJOVWRXdknCzWMslxA/ohzhsccL68%3D" style="width: 300px; margin-right: 10px;">
+    <img src="https://files.oaiusercontent.com/file-7kWDVdhNbqu5A75379fQyE?se=2025-02-19T13%3A49%3A39Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D73e3fab9-fb5e-44a3-8fd4-ed959ad89bef.webp&sig=BVJy0zP4tJrggc%2BdHzhxegslgfGc1c2LbUacbVMFpDc%3D" style="width: 300px; margin-right: 10px;">
+    <img src="https://files.oaiusercontent.com/file-TqsLMXB8JDbrV9ug2mgnNL?se=2025-02-19T13%3A51%3A40Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dc7eff773-faee-4b34-96d2-20d1ed99002f.webp&sig=XG/OqeAeS1FbByCluYnCjy7dLyS%2BVI%2BPQK/QpPpvVvg%3D" style="width: 300px; margin-right: 10px;">
+    <img src="https://files.oaiusercontent.com/file-SLwNnaXnW1SCFKC9QdznHp?se=2025-02-19T13%3A49%3A53Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dbc928fb5-eceb-48c1-b180-db0149bcde22.webp&sig=PRQJAbSZ0WCuH4U%2B0FZTTRbRF9DkNkPaKFloDL6OEIQ%3D" style="width: 300px; margin-right: 10px;">
+    <img src="https://files.oaiusercontent.com/file-W2QaJSsWiDYXmy6TL2c6yi?se=2025-02-19T13%3A52%3A48Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D0f711ca0-7191-468e-b1b7-a3d0e80843c0.webp&sig=0LZGRgytMG975l9BbeKnATEZ43d36VfzhwUVqnJDmZY%3D" style="width: 300px; margin-right: 10px;">
+  
+  
+  </div>
+</div>
+
+<style>
+  @keyframes scrollX {
+      from {
+          transform: translateX(0%);
+      }
+      to {
+          transform: translateX(-50%);
+      }
+  }
+</style>
+</br>
+</br>
   </div>
   <div class="filter-container">
     <select id="categoryFilter" onchange="filterCategory()">
@@ -1172,7 +1280,7 @@
     window.addEventListener('load', function () {
       setTimeout(function () {
         document.getElementById('preloader').style.display = 'none';
-      }, 4000); 
+      }, 4000);
     });
 
     fetchDeals();
