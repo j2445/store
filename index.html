@@ -7,6 +7,201 @@
   <title>SaveRadar - Deals</title>
   <link rel="icon" href="https://i.ibb.co/hxz6WY7g/logo-new.png" type="image/x-icon" />
   <style>
+    #preloader {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .loader {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      margin: 20px;
+    }
+
+    .loader-inner {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 4px solid transparent;
+      border-top-color: #f10c1f;
+      border-radius: 50%;
+      animation: rotate 1.5s linear infinite;
+    }
+
+    .loader-inner::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border: 4px solid transparent;
+      border-top-color: #ffd700;
+      border-radius: 50%;
+      animation: rotate 2s linear infinite reverse;
+    }
+
+    .loader-inner::after {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      border: 4px solid transparent;
+      border-top-color: #2196f3;
+      border-radius: 50%;
+      animation: rotate 1s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-text {
+      color: white;
+      font-size: 24px;
+      margin-top: 20px;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      position: relative;
+    }
+
+    .loading-text::after {
+      content: '...';
+      display: inline-block;
+      width: 20px;
+      text-align: left;
+      animation: dots 1.5s infinite;
+    }
+
+    @keyframes dots {
+
+      0%,
+      20% {
+        content: '.';
+      }
+
+      40% {
+        content: '..';
+      }
+
+      60%,
+      100% {
+        content: '...';
+      }
+    }
+
+    .brand-logo {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.95);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(0.95);
+        opacity: 0.8;
+      }
+    }
+
+
+    .resource-popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .resource-content {
+      background: #444;
+      padding: 30px;
+      border-radius: 10px;
+      color: white;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .blog-post,
+    .faq-item,
+    .support-section {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #555;
+      border-radius: 5px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #666;
+      background: #333;
+      color: white;
+    }
+
+    .contact-form textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    .contact-form button {
+      background: #f10c1f;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .contact-form button:hover {
+      background: #d10a1a;
+    }
+
+
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -42,20 +237,55 @@
       box-sizing: border-box;
     }
 
-    @media (max-width: 768px) {
-      content {
-        font-size: 36px;
-        margin: 15px auto;
-      }
+    .filter-container {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      margin: 0 20px 20px 20px;
+      width: auto;
     }
 
-    @media (max-width: 480px) {
-      content {
-        font-size: 28px;
-        margin: 10px auto;
-        padding: 0 15px;
-      }
+    .filter-container select,
+    .filter-container input {
+      width: 100%;
+      max-width: 100%;
     }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      padding: 20px;
+      background-color: #333;
+    }
+
+    .card {
+      width: 100%;
+    }
+
+    .card img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .card h3 {
+      font-size: 14px;
+    }
+
+    .price,
+    .old-price {
+      font-size: 12px;
+    }
+
+    .discount {
+      font-size: 12px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-top: 10px;
+    }
+
 
     .filter-container {
       text-align: left;
@@ -84,22 +314,6 @@
     .filter-container input {
       width: 300px;
       max-width: 100%;
-    }
-
-    @media (max-width: 768px) {
-      .filter-container {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-        margin: 0 20px 20px 20px;
-        width: auto;
-      }
-
-      .filter-container select,
-      .filter-container input {
-        width: 100%;
-        max-width: 100%;
-      }
     }
 
     .disclaimer {
@@ -159,7 +373,7 @@
     }
 
     .price {
-      font-size: 15px;
+      font-size: 20px;
       color: #4caf50;
     }
 
@@ -311,168 +525,6 @@
       margin-top: 20px;
     }
 
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .card {
-        width: 100%;
-      }
-
-      .card img {
-        width: 80px;
-        height: 80px;
-      }
-
-      .card h3 {
-        font-size: 14px;
-      }
-
-      .price,
-      .old-price {
-        font-size: 12px;
-      }
-
-      .discount {
-        font-size: 12px;
-      }
-
-      .container {
-        padding: 0 5px;
-      }
-
-      h1 {
-        font-size: 22px;
-        margin-top: 10px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        padding: 10px;
-      }
-
-      .card {
-        width: 100%;
-      }
-
-      .card img {
-        width: 100%;
-        height: 150px;
-      }
-
-      .card h3 {
-        font-size: 14px;
-      }
-
-      .price,
-      .old-price {
-        font-size: 12px;
-      }
-
-      .discount {
-        font-size: 12px;
-      }
-
-      h1 {
-        font-size: 24px;
-        margin: 15px;
-      }
-
-      h1 img {
-        width: 30px;
-      }
-
-      content {
-        margin-left: 5%;
-        font-size: 30px;
-      }
-
-      .disclaimer {
-        font-size: 16px;
-        margin: 15px;
-      }
-
-      #preloader {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-      }
-
-      .loading-text {
-        font-size: 20px;
-      }
-
-      .popup {
-        padding: 15px;
-      }
-
-      .popup-content {
-        width: 90%;
-        max-width: 300px;
-        margin: 20px;
-        padding: 15px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      body {
-        overflow-x: hidden;
-        width: 100%;
-      }
-
-      .container {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 10px;
-        margin: 0;
-        gap: 10px;
-        width: 100%;
-        max-width: 100vw;
-        box-sizing: border-box;
-      }
-
-      .card {
-        width: 100%;
-        margin: 0;
-        padding: 10px;
-      }
-
-      .card img {
-        height: 120px;
-        width: 100%;
-        object-fit: cover;
-      }
-
-      content {
-        font-size: 24px;
-        margin: 0 20px;
-        width: auto;
-        text-align: center;
-      }
-
-      .disclaimer {
-        font-size: 14px;
-        margin: 15px 20px;
-        width: auto;
-      }
-    }
-
-    #preloader {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 9999;
-      background-color: #333;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
 
     .loading-text {
       color: white;
@@ -783,12 +835,174 @@
       font-size: 30px;
       cursor: pointer;
     }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 24px;
+        margin: 10px;
+      }
+
+      h1 img {
+        width: 30px;
+      }
+
+      content {
+        font-size: 28px;
+        margin: 10px auto;
+      }
+
+      .disclaimer {
+        font-size: 16px;
+        margin: 10px 20px;
+      }
+
+      .filter-container {
+        flex-direction: column;
+        gap: 10px;
+        margin: 0 10px 10px 10px;
+      }
+
+      .filter-container select,
+      .filter-container input {
+        width: 100%;
+        max-width: 100%;
+        font-size: 14px;
+      }
+
+      .container {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 columns on mobile */
+        gap: 10px;
+        padding: 10px;
+      }
+
+      .card img {
+        width: 100px;
+        height: 100px;
+        margin-left: 0;
+        margin-top: 5%;
+      }
+
+      .card h3 {
+        font-size: 14px;
+      }
+
+      .price,
+      .old-price {
+        font-size: 12px;
+      }
+
+      .discount {
+        font-size: 10px;
+        padding: 3px 8px;
+      }
+
+      .card a {
+        font-size: 12px;
+        padding: 8px;
+      }
+
+      .footer {
+        flex-direction: column;
+        padding: 20px 10px;
+      }
+
+      .footer-section {
+        min-width: 100%;
+        margin: 10px 0;
+      }
+
+      .footer-section h3 {
+        font-size: 18px;
+      }
+
+      .footer-section div a {
+        font-size: 14px;
+      }
+
+      .footer-section input[type="email"] {
+        width: 100%;
+      }
+
+      .footer-section button,
+      .footer-section a button {
+        font-size: 14px;
+      }
+
+      .image-popup .content {
+        width: 90%;
+        max-width: 90%;
+        padding: 15px;
+      }
+
+      .image-popup img {
+        width: 200px;
+        height: 200px;
+      }
+
+      .image-popup h2 {
+        font-size: 18px;
+      }
+
+      .image-popup .price-detail {
+        font-size: 16px;
+      }
+
+      .image-popup .buy-button {
+        font-size: 14px;
+        padding: 8px 20px;
+      }
+
+      .resource-popup .resource-content {
+        width: 90%;
+        max-width: 90%;
+        padding: 15px;
+      }
+
+      .resource-popup h2 {
+        font-size: 20px;
+      }
+
+      .blog-post,
+      .faq-item,
+      .support-section {
+        padding: 10px;
+      }
+
+      .blog-post h3,
+      .faq-item h3,
+      .support-section h3 {
+        font-size: 16px;
+      }
+
+      .blog-post p,
+      .faq-item p,
+      .support-section p {
+        font-size: 14px;
+      }
+
+      .contact-form input,
+      .contact-form select,
+      .contact-form textarea {
+        font-size: 14px;
+      }
+
+      .contact-form button {
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
 
 <body>
+
   <div id="preloader">
-    <div class="loading-text">LOADING...</div>
+    <img src="https://i.ibb.co/hxz6WY7g/logo-new.png" class="brand-logo" alt="Logo">
+    <div class="loader">
+      <div class="loader-inner"></div>
+    </div>
+    <div class="loading-text">Scanning Deals</div>
   </div>
   <h1>
     <img src="https://i.ibb.co/hxz6WY7g/logo-new.png" alt="SaveRadar Logo" />
@@ -829,16 +1043,16 @@
     <div class="footer-section">
       <h3>Resources</h3>
       <div>
-        <a href="#">Blog</a>
+        <a href="#" onclick="showBlogPopup()">Blog</a>
       </div>
       <div>
-        <a href="#">FAQs</a>
+        <a href="#" onclick="showFAQPopup()">FAQs</a>
       </div>
       <div>
-        <a href="#">Support</a>
+        <a href="#" onclick="showSupportPopup()">Support</a>
       </div>
       <div>
-        <a href="#">Contact Us</a>
+        <a href="#" onclick="showContactPopup()">Contact Us</a>
       </div>
     </div>
     <div class="footer-section">
@@ -953,6 +1167,17 @@
         console.error("Error fetching the deals:", error);
       }
     }
+
+
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        document.getElementById('preloader').style.display = 'none';
+      }, 4000); 
+    });
+
+    fetchDeals();
+
+
 
     function populateCategoryFilter() {
       const categoryFilter = document.getElementById("categoryFilter");
@@ -1074,20 +1299,7 @@
       renderPagination();
     }
 
-    fetchDeals();
 
-    window.addEventListener("load", function () {
-      setTimeout(function () {
-        document.getElementById("preloader").style.display = "none";
-      }, 2000);
-
-      setTimeout(function () {
-        const preloader = document.getElementById("preloader");
-        if (preloader.style.display === "none") {
-          document.getElementById("emailPopup").style.display = "flex";
-        }
-      }, 10000);
-    });
 
     function closePopup() {
       document.getElementById("emailPopup").style.display = "none";
@@ -1114,6 +1326,139 @@
       document.getElementById("imagePopup").style.display = "flex";
     }
   </script>
+
+  <div class="resource-popup" id="blogPopup">
+    <div class="resource-content">
+      <span class="close" onclick="closeResourcePopup('blogPopup')">&times;</span>
+      <h2>Latest Blog Posts</h2>
+      <div class="blog-posts">
+        <div class="blog-post">
+          <h3>Top 10 Money-Saving Tips for Online Shopping</h3>
+          <p>Discover the best strategies to maximize your savings while shopping online...</p>
+        </div>
+        <div class="blog-post">
+          <h3>How to Spot Fake Deals During Sales</h3>
+          <p>Learn to identify genuine deals from marketing tricks...</p>
+        </div>
+        <div class="blog-post">
+          <h3>Best Times to Shop for Different Categories</h3>
+          <p>Strategic shopping guide for various product categories...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource-popup" id="faqPopup">
+    <div class="resource-content">
+      <span class="close" onclick="closeResourcePopup('faqPopup')">&times;</span>
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-content">
+        <div class="faq-item">
+          <h3>How does SaveRadar work?</h3>
+          <p>SaveRadar automatically tracks and aggregates the best deals across various online stores...</p>
+        </div>
+        <div class="faq-item">
+          <h3>Are these deals legitimate?</h3>
+          <p>Yes, all deals are verified and updated regularly to ensure accuracy...</p>
+        </div>
+        <div class="faq-item">
+          <h3>How often are deals updated?</h3>
+          <p>Our deals are updated multiple times daily to ensure you get the latest offers...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource-popup" id="supportPopup">
+    <div class="resource-content">
+      <span class="close" onclick="closeResourcePopup('supportPopup')">&times;</span>
+      <h2>Support Center</h2>
+      <div class="support-content">
+        <div class="support-section">
+          <h3>Common Issues</h3>
+          <ul>
+            <li>Deal links not working</li>
+            <li>Price discrepancies</li>
+            <li>Website navigation help</li>
+          </ul>
+        </div>
+        <div class="support-section">
+          <h3>Get Help</h3>
+          <p>Email us at: support@saveradar.com</p>
+          <p>Response time: Within 24 hours</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource-popup" id="contactPopup">
+    <div class="resource-content">
+      <span class="close" onclick="closeResourcePopup('contactPopup')">&times;</span>
+      <h2>Contact Us</h2>
+      <div class="contact-form">
+        <input type="text" placeholder="Your Name" id="contactName">
+        <input type="email" placeholder="Your Email" id="contactEmail">
+        <select id="contactSubject">
+          <option value="">Select Subject</option>
+          <option value="general">General Inquiry</option>
+          <option value="support">Technical Support</option>
+          <option value="business">Business Proposal</option>
+        </select>
+        <textarea placeholder="Your Message" id="contactMessage"></textarea>
+        <button onclick="submitContact()">Send Message</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    function showBlogPopup() {
+      document.getElementById('blogPopup').style.display = 'flex';
+    }
+
+    function showFAQPopup() {
+      document.getElementById('faqPopup').style.display = 'flex';
+    }
+
+    function showSupportPopup() {
+      document.getElementById('supportPopup').style.display = 'flex';
+    }
+
+    function showContactPopup() {
+      document.getElementById('contactPopup').style.display = 'flex';
+    }
+
+    function closeResourcePopup(popupId) {
+      document.getElementById(popupId).style.display = 'none';
+    }
+
+    function submitContact() {
+      const name = document.getElementById('contactName').value;
+      const email = document.getElementById('contactEmail').value;
+      const subject = document.getElementById('contactSubject').value;
+      const message = document.getElementById('contactMessage').value;
+
+      if (!name || !email || !subject || !message) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      // Here you would typically send this data to your server
+      alert('Thank you for your message. We will get back to you soon!');
+      closeResourcePopup('contactPopup');
+    }
+
+    // Close popups when clicking outside
+    window.onclick = function (event) {
+      const popups = document.getElementsByClassName('resource-popup');
+      for (let popup of popups) {
+        if (event.target === popup) {
+          popup.style.display = 'none';
+        }
+      }
+    }
+  </script>
+
 </body>
 
 </html>
