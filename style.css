@@ -342,7 +342,6 @@
     padding-top: 20px;
   }
   
-  /* Responsive Adjustments */
   @media (max-width: 768px) {
     .hero-section {
       flex-direction: column;
@@ -354,6 +353,24 @@
     }
     .container {
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+  
+    /* New styles for mobile view */
+    .card img {
+      width: 150px; /* Smaller image size */
+      height: 150px;
+    }
+    .card h3 {
+      font-size: 14px; /* Smaller title font size */
+    }
+    .price {
+      font-size: 16px; /* Smaller price font size */
+    }
+    .old-price {
+      font-size: 12px; /* Smaller old price font size */
+    }
+    .rating {
+      font-size: 14px; /* Smaller rating font size */
     }
   }
   
