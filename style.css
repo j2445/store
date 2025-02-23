@@ -390,5 +390,9 @@
       .nav-links a {
         margin: 10px 0; /* Vertical spacing between links */
       }
+      .filter-container input {
+        padding: 8px; /* Reduce padding for smaller input */
+        font-size: 14px; /* Smaller font size */
+      }
   }
   
