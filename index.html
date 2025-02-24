@@ -780,34 +780,13 @@
 
 
      //subscribe 
-     function submitEmail() {
-    var email = document.getElementById("emailInput").value.trim();
+  fetch("https://script.google.com/macros/s/AKfycbyzRikSTgCjfAEn9O3dpNe3oUEdNCeCzbqEvXhAqOIaHkCsuSYKcl3Ky8sdrqrHPoos/exec", {
+  method: "POST",
+  mode: "no-cors",  // Add this line
+  body: JSON.stringify({ email: email }),
+  headers: { "Content-Type": "application/json" }
+})
 
-    // Basic email validation
-    if (!email || !email.includes("@") || !email.includes(".")) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
-    fetch("https://script.google.com/macros/s/AKfycbyzRikSTgCjfAEn9O3dpNe3oUEdNCeCzbqEvXhAqOIaHkCsuSYKcl3Ky8sdrqrHPoos/exec", {
-      method: "POST",
-      body: JSON.stringify({ email: email }),
-      headers: { "Content-Type": "application/json" }
-    })
-    .then(response => response.text())
-    .then(data => {
-      if (data.includes("Success")) {
-        alert("Subscribed Successfully!");
-        document.getElementById("emailInput").value = ""; // Clear input field
-      } else {
-        alert("Error: " + data);
-      }
-    })
-    .catch(error => {
-      alert("Request failed! Check console for details.");
-      console.error(error);
-    });
-  }
 
     </script>
 </body>
