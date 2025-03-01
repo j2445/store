@@ -767,49 +767,16 @@
         <section class="contact-section" id="contact-section">
             <h2>Contact Us</h2>
             <p>Have questions or need assistance? Feel free to reach out to us using the form below.</p>
-            <form id="contact-form">
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
-                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
+            <form action="https://formsubmit.co/9ef96fb4eea54bfbc2ab00ef5da88c03" method="POST">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <textarea name="message" placeholder="Enter your message" required></textarea>
+                <button type="submit">Submit Form</button>
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://saveradar.vercel.app/thankyou.html">
             </form>
         </section>
-
-        <script>
-
-document.getElementById("contact-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    let formData = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        message: document.getElementById("message").value
-    };
-
-    fetch("https://script.google.com/macros/s/AKfycbydjFvQaOm_rWQCYaHrMYDVnvn-49bNA-SLrxIfTazGKUm_LSE1FqpZe4_ZmPduOTEA/exec", {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log("Server Response:", data);
-        if (data.includes("Success")) {
-            alert("Message sent successfully!");
-            document.getElementById("contact-form").reset();
-        } else {
-            alert("Failed to send message: " + data);
-        }
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("An error occurred. Please try again.");
-    });
-});
-
-            </script>
     </div>
 
     <!-- Footer -->
