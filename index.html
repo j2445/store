@@ -1160,9 +1160,11 @@
     <script>
         // Preloader
         window.addEventListener('load', function() {
+            window.scrollTo(0, 0);
+            
             setTimeout(function() {
                 document.getElementById('preloader').style.display = 'none';
-            }, 2000);
+            }, 1200);
         });
 
         // Navigation Toggle
@@ -1427,13 +1429,16 @@ function renderDeals() {
 
     <script>
 
-               // Deal Modal Functions
-               function showDealDetails(deal) {
+            // Deal Modal Functions
+        function showDealDetails(deal) {
             const modal = document.getElementById('dealModal');
             const modalContent = document.getElementById('dealModalContent');
             
             // Prevent body scroll when modal is open
             document.body.classList.add('no-scroll');
+            
+            // Add state to browser history when opening modal
+            history.pushState({ modal: 'deal' }, '');
             
             modalContent.innerHTML = `
                 <img src="${deal.image1}" alt="${deal.title}">
@@ -1458,21 +1463,30 @@ function renderDeals() {
             modal.style.display = 'block';
         }
 
+        function closeModal() {
+            const modal = document.getElementById('dealModal');
+            modal.style.display = 'none';
+            document.body.classList.remove('no-scroll');
+        }
+
         // Close modal when clicking the close button or outside the modal
         document.querySelector('.deal-modal-close').onclick = function() {
-            document.getElementById('dealModal').style.display = 'none';
-            // Re-enable body scroll when modal is closed
-            document.body.classList.remove('no-scroll');
+            closeModal();
         }
 
         window.onclick = function(event) {
             const modal = document.getElementById('dealModal');
             if (event.target == modal) {
-                modal.style.display = 'none';
-                // Re-enable body scroll when modal is closed
-                document.body.classList.remove('no-scroll');
+                closeModal();
             }
         }
+
+        // Handle back button
+        window.addEventListener('popstate', function(event) {
+            if (document.getElementById('dealModal').style.display === 'block') {
+                closeModal();
+            }
+        });
 
     </script>
 
