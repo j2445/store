@@ -1025,10 +1025,191 @@
         </section>
 
         <!-- About Section -->
-        <section class="about-section" id="about-section">
-            <h2>About Save Radar</h2>
-            <p>Save Radar is dedicated to helping you save money while shopping for your favorite items. We curate the best deals and discounts from top brands and retailers, ensuring you get the best value for your money. Our mission is to make online shopping more affordable and enjoyable for everyone.</p>
-        </section>
+<section class="about-section" id="about-section">
+    <div class="about-container">
+        <h2 class="about-title">About Save Radar</h2>
+        <div class="about-content">
+            <div class="about-icon">
+                <i class="fas fa-shield-alt pulse"></i>
+            </div>
+            <p class="about-text">
+                Save Radar is dedicated to helping you save money while shopping for your favorite items. We curate the best deals and discounts from top brands and retailers, ensuring you get the best value for your money. Our mission is to make online shopping more affordable and enjoyable for everyone.
+            </p>
+            <div class="about-features">
+                <div class="feature">
+                    <i class="fas fa-tags bounce"></i>
+                    <span>Best Deals</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-clock rotate"></i>
+                    <span>Real-time Updates</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-percent shake"></i>
+                    <span>Huge Savings</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .about-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #fff5f2, #fff);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-title {
+            font-size: 2.5em;
+            color: #ff5733;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .about-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #ff5733;
+            border-radius: 2px;
+        }
+
+        .about-content {
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .about-icon {
+            font-size: 3em;
+            color: #ff5733;
+            margin-bottom: 20px;
+        }
+
+        .about-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+
+        .about-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature i {
+            font-size: 2em;
+            color: #ff5733;
+        }
+
+        .feature span {
+            font-weight: 600;
+            color: #444;
+        }
+
+        /* Animations */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+
+        .rotate {
+            animation: rotate 4s linear infinite;
+        }
+
+        .shake {
+            animation: shake 3s infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        /* Dark theme support */
+        .dark-theme .about-section {
+            background: linear-gradient(135deg, #2a2a2a, #333);
+        }
+
+        .dark-theme .about-text {
+            color: #ccc;
+        }
+
+        .dark-theme .feature span {
+            color: #fff;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .about-title {
+                font-size: 2em;
+            }
+
+            .about-text {
+                font-size: 1.1em;
+            }
+
+            .about-features {
+                gap: 20px;
+            }
+
+            .feature i {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</section>
 
         <!-- All Deals Section -->
         <section class="deals-section" id="deals-section">
@@ -1070,8 +1251,104 @@
     <!-- Footer -->
     <footer>
         <div class="footer-section about">
-            <h3>About Us</h3>
-            <p>We're dedicated to finding you the best deals on electronics, gadgets, and more. Follow us to stay updated on all the latest offers.</p>
+            <h3>About Us <i class="fas fa-info-circle pulse-icon"></i></h3>
+            <div class="about-content">
+                <p>
+                    <span class="highlight">🎯 Your Deal Hunter!</span> We're passionate about finding 
+                    <span class="deals-emoji">🔥 Amazing Deals</span> on:
+                </p>
+                <ul class="deal-categories">
+                    <li>📱 Electronics & Gadgets</li>
+                    <li>👕 Fashion & Accessories</li>
+                    <li>🏠 Home & Living</li>
+                    <li>✨ And Much More!</li>
+                </ul>
+                <p class="follow-text">
+                    <span class="sparkle">✨</span> Follow us for exclusive offers and flash deals! <span class="sparkle">✨</span>
+                </p>
+            </div>
+            <style>
+                .footer-section.about {
+                    transition: transform 0.3s ease;
+                    padding: 20px;
+                    border-radius: 10px;
+                    background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+                }
+
+                .footer-section.about:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(255,87,51,0.2);
+                }
+
+                .about h3 {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    color: #ff5733;
+                    margin-bottom: 15px;
+                }
+
+                .pulse-icon {
+                    animation: pulse 2s infinite;
+                }
+
+                .about-content {
+                    font-size: 1.1em;
+                    line-height: 1.6;
+                }
+
+                .highlight {
+                    color: #ff5733;
+                    font-weight: bold;
+                }
+
+                .deal-categories {
+                    list-style: none;
+                    padding: 10px 0;
+                    margin: 10px 0;
+                }
+
+                .deal-categories li {
+                    margin: 8px 0;
+                    transition: transform 0.3s ease;
+                }
+
+                .deal-categories li:hover {
+                    transform: translateX(10px);
+                    color: #ff5733;
+                }
+
+                .follow-text {
+                    margin-top: 15px;
+                    font-weight: 500;
+                }
+
+                .sparkle {
+                    display: inline-block;
+                    animation: sparkleRotate 2s linear infinite;
+                }
+
+                .deals-emoji {
+                    animation: dealsPulse 1.5s infinite;
+                }
+
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.2); }
+                    100% { transform: scale(1); }
+                }
+
+                @keyframes sparkleRotate {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+
+                @keyframes dealsPulse {
+                    0% { opacity: 1; }
+                    50% { opacity: 0.6; }
+                    100% { opacity: 1; }
+                }
+            </style>
         </div>
         <div class="footer-section links">
             <h3>Quick Links</h3>
@@ -1102,10 +1379,138 @@
         
         
     </footer>
-    <div class="footer-bottom">
-        <p>© 2025 Save Radar. All rights reserved.</p>
-        <p><strong>Disclaimer:</strong> When you buy from links on Save Radar, we may earn a small commission.</p>
+<div class="footer-bottom">
+    <div class="footer-content">
+        <div class="footer-wave"></div>
+        <p class="copyright">
+            <span class="year">© 2025</span>
+            <span class="company">Save Radar</span>
+            <span class="rights">All rights reserved</span>
+        </p>
+        <p class="disclaimer">
+            <span class="disclaimer-label">Disclaimer:</span>
+            <span class="disclaimer-text">When you buy from links on Save Radar, we may earn a small commission</span>
+        </p>
     </div>
+
+    <style>
+        .footer-bottom {
+            background: linear-gradient(135deg, #ff5733, #ff8c1a, #ff5733);
+            background-size: 200% 200%;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            animation: gradientMove 15s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .footer-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: waveMove 2s linear infinite;
+        }
+
+        @keyframes waveMove {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .copyright, .disclaimer {
+            margin: 8px 0;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .copyright:hover, .disclaimer:hover {
+            transform: translateY(-5px);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .year, .company, .rights {
+            display: inline-block;
+            margin: 0 8px;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .company {
+            font-weight: 700;
+            color: #fff;
+            position: relative;
+            padding: 0 5px;
+        }
+
+        .company::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: right;
+        }
+
+        .company:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .disclaimer-label {
+            font-weight: 700;
+            color: #fff;
+            margin-right: 8px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .disclaimer-text {
+            opacity: 0.95;
+            font-size: 15px;
+            transition: opacity 0.3s ease;
+        }
+
+        .disclaimer:hover .disclaimer-text {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .footer-bottom {
+                padding: 15px 10px;
+            }
+            
+            .copyright, .disclaimer {
+                font-size: 13px;
+                line-height: 1.5;
+            }
+
+            .year, .company, .rights {
+                margin: 0 4px;
+            }
+        }
+    </style>
+</div>
     <!-- Privacy Policy Modal -->
     <div class="privacy-modal" id="privacyModal">
         <div class="privacy-modal-content">
