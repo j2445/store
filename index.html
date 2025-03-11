@@ -740,6 +740,19 @@
             .container {
                 grid-template-columns: repeat(2, 1fr); /* Display 2 columns on mobile */
             }
+            .deal-modal-content {
+                margin: 10px auto;
+                padding: 20px;
+                width: 95%;
+            }
+
+            #dealModalContent h2 {
+                font-size: 20px;
+            }
+
+            #dealModalContent .price-info {
+                font-size: 24px;
+            }
 
             .card img {
                 height: 250px; /* Increase the height for mobile view */
@@ -777,6 +790,184 @@
             }
         }
 
+                /* Deal Modal Styles */
+                .deal-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.9);
+            overflow-y: auto;
+        }
+
+        .deal-modal-content {
+            background-color: #fff;
+            margin: 0;
+            padding: 30px;
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            animation: modalFade 0.3s ease-in-out;
+        }
+
+        #dealModalContent {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #dealModalContent img {
+            max-width: 100%;
+            height: auto;
+            max-height: 60vh;
+            object-fit: contain;
+            border-radius: 8px;
+            margin: 0 auto 30px;
+            display: block;
+        }
+
+        .deal-modal-close {
+            position: fixed;
+            right: 30px;
+            top: 20px;
+            font-size: 35px;
+            font-weight: bold;
+            color: #ff5733;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        @keyframes modalFade {
+            from {opacity: 0; transform: translateY(-10px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .deal-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .deal-modal-close:hover {
+            color: #ff5733;
+        }
+
+        #dealModalContent {
+            padding: 20px;
+        }
+
+        #dealModalContent img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        #dealModalContent h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        #dealModalContent .deal-details {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        #dealModalContent .price-info {
+            font-size: 24px;
+            color: #4caf50;
+            margin-bottom: 15px;
+        }
+
+        /* Theme Toggle Button Styles */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            margin-right: 20px;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(45deg);
+        }
+
+                /* Dark Theme Styles */
+                body.dark-theme {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .dark-theme .about-section,
+        .dark-theme .deals-section,
+        .dark-theme .contact-section {
+            background: #2d2d2d;
+            color: #fff;
+        }
+
+        .dark-theme .card {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+
+        .dark-theme .card h3 {
+            color: #fff;
+        }
+
+        /* Dark Theme Modal Styles */
+        .dark-theme .deal-modal-content {
+            background-color: #2d2d2d;
+            color: #fff;
+        }
+
+        .dark-theme #dealModalContent h2 {
+            color: #fff;
+        }
+
+        .dark-theme #dealModalContent p {
+            color: #e0e0e0;
+        }
+
+        .dark-theme #dealModalContent .deal-details {
+            color: #fff;
+        }
+
+        .dark-theme #dealModalContent .price-info {
+            color: #4caf50;
+        }
+
+        .dark-theme #dealModalContent .old-price {
+            color: #888;
+        }
+
+        .dark-theme .deal-modal-close {
+            color: #fff;
+        }
+
+        .dark-theme .deal-modal-close:hover {
+            color: #ff5733;
+        }
+
+        @media (max-width: 768px) {
+            .theme-toggle {
+                position: absolute;
+                right: 70px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
 
 
     </style>
@@ -811,6 +1002,11 @@
             <li><a href="#about-section" class="nav-link">About</a></li>
             <li><a href="#contact-section" class="nav-link">Contact</a></li>
         </ul>
+        
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="theme-toggle">
+            <i class="fas fa-sun"></i>
+        </button>
         <div class="burger">
             <div class="line1"></div>
             <div class="line2"></div>
@@ -846,6 +1042,14 @@
             <div class="container" id="deals-container"></div>
             <div class="pagination" id="pagination"></div>
         </section>
+
+            <!-- Deal Details Modal -->
+    <div id="dealModal" class="deal-modal">
+        <div class="deal-modal-content">
+            <span class="deal-modal-close">&times;</span>
+            <div id="dealModalContent"></div>
+        </div>
+    </div>
 
         <!-- Contact Section -->
         <section class="contact-section" id="contact-section">
@@ -1190,6 +1394,116 @@ scrollBtn.addEventListener('click', () => {
     });
 });
         
+    </script>
+
+    <script>
+
+function renderDeals() {
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const dealsToShow = filteredDeals.slice(start, end);
+
+        let dealsHTML = "";
+        dealsToShow.forEach((deal) => {
+            const { image1, title, salePrice, regularPrice, discount, link } = deal;
+            dealsHTML += `
+                <div class="card" onclick="showDealDetails(${JSON.stringify(deal).replace(/"/g, '&quot;')})">
+                    <div class="discount">${discount}</div>
+                    <img src="${image1}" alt="${title}">
+                    <h3>${title}</h3>
+                    <p class="price">${salePrice} <span class="old-price">${regularPrice}</span></p>
+                    <p class="rating">★★★★☆</p>
+                    <div class="card-actions">
+                        <a href="${link}" target="_blank" onclick="event.stopPropagation()">BUY NOW</a>
+                    </div>
+                </div>
+            `;
+        });
+
+        document.getElementById("deals-container").innerHTML = dealsHTML;
+    }
+
+    </script>
+
+    <script>
+
+               // Deal Modal Functions
+               function showDealDetails(deal) {
+            const modal = document.getElementById('dealModal');
+            const modalContent = document.getElementById('dealModalContent');
+            
+            // Prevent body scroll when modal is open
+            document.body.classList.add('no-scroll');
+            
+            modalContent.innerHTML = `
+                <img src="${deal.image1}" alt="${deal.title}">
+                <h2>${deal.title}</h2>
+                <div class="deal-details">
+                    <div class="price-info">
+                        <strong>Sale Price:</strong> ${deal.salePrice}
+                        <span class="old-price">${deal.regularPrice}</span>
+                    </div>
+                    <p><strong>Store:</strong> ${deal.store}</p>
+                    <p><strong>Category:</strong> ${deal.category}</p>
+                    <p><strong>Discount:</strong> ${deal.discount}</p>
+                    <p><strong>Savings:</strong> ${deal.savings}</p>
+                    <a href="${deal.link}" target="_blank" class="card-actions">
+                        <button style="background: #ff5733; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                            BUY NOW
+                        </button>
+                    </a>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        // Close modal when clicking the close button or outside the modal
+        document.querySelector('.deal-modal-close').onclick = function() {
+            document.getElementById('dealModal').style.display = 'none';
+            // Re-enable body scroll when modal is closed
+            document.body.classList.remove('no-scroll');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('dealModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+                // Re-enable body scroll when modal is closed
+                document.body.classList.remove('no-scroll');
+            }
+        }
+
+    </script>
+
+    <script>
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            if (document.body.classList.contains('dark-theme')) {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+            
+            // Save theme preference
+            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        });
+
+        // Load saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+    </script>
+
     </script>
 </body>
 </html>
