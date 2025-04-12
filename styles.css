@@ -242,15 +242,14 @@
 
             .burger {
                 display: flex;
-                position: absolute;
-                /* Change to absolute positioning */
+                position: fixed; /* Change to fixed positioning */
                 right: 20px;
-                /* Position from right */
-                top: 50%;
-                /* Center vertically */
-                transform: translateY(-50%);
-                /* Perfect vertical centering */
+                top: 20px; /* Adjust top position */
+                transform: translateY(0); /* Remove vertical centering */
                 gap: 5px;
+                z-index: 1003; /* Ensure it's above other elements */
+                cursor: pointer; /* Add pointer cursor */
+                padding: 10px; /* Add padding for larger touch target */
             }
         }
 
@@ -729,16 +728,21 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-section {
-                padding: 60px 20px;
+            .hero-text {
+                padding: 20px;
             }
-
+        
             .hero-text h1 {
-                font-size: 36px;
+                font-size: 1.8em;
+                margin-bottom: 15px;
             }
-
+        
             .hero-text p {
-                font-size: 18px;
+                font-size: 0.95em;
+                line-height: 1.6;
+                padding: 0;
+                max-width: 100%;
+                text-align: justify;
             }
 
             .container {
@@ -912,13 +916,9 @@
             cursor: pointer;
             padding: 8px;
             border-radius: 50%;
-            transition: all 0.3s ease;
             margin-right: 20px;
         }
 
-        .theme-toggle:hover {
-            transform: rotate(45deg);
-        }
 
         /* Dark Theme Styles */
         body.dark-theme {
@@ -982,6 +982,7 @@
                 right: 70px;
                 top: 50%;
                 transform: translateY(-50%);
+                z-index: 1002;
             }
         }
 
@@ -1592,35 +1593,79 @@
 
 
             /* Google Translate Styles */
-.translate-element {
-    margin-right: 15px;
-}
-
-.goog-te-gadget {
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 14px !important;
-}
-
-.goog-te-gadget-simple {
-    background-color: transparent !important;
-    border: 1px solid var(--text-color) !important;
-    padding: 5px !important;
-    border-radius: 4px !important;
-    font-size: 14px !important;
-    line-height: 1.2 !important;
-    display: inline-block;
-    cursor: pointer;
-    zoom: 1;
-}
-
-.goog-te-gadget-simple span {
-    color: var(--text-color) !important;
-}
-
-.goog-te-menu-value span {
-    color: var(--text-color) !important;
-}
-
-.goog-te-menu-value span:hover {
-    color: var(--accent-color) !important;
+            .language-selector {
+                margin-right: 15px;
+                z-index: 1001;
+            }
+            
+            .goog-te-gadget {
+                font-family: 'Poppins', sans-serif !important;
+            }
+            
+            .goog-te-gadget-simple {
+                background: #fff !important;
+                border: 2px solid #ff5733 !important;
+                padding: 8px 16px !important;
+                border-radius: 25px !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+                transition: all 0.3s ease !important;
+            }
+            
+          
+            
+            .goog-te-menu-value {
+                color: #333 !important;
+                font-family: 'Poppins', sans-serif !important;
+                font-size: 14px !important;
+            }
+            
+            .goog-te-menu-frame {
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+                border-radius: 8px !important;
+            }
+            
+            .goog-te-menu2 {
+                border: none !important;
+                padding: 8px !important;
+                border-radius: 8px !important;
+                max-height: 300px !important;
+                overflow-y: auto !important;
+            }
+            
+            .goog-te-menu2-item div {
+                padding: 8px 16px !important;
+                color: #333 !important;
+                font-family: 'Poppins', sans-serif !important;
+                transition: background 0.3s ease !important;
+            }
+            
+            .goog-te-menu2-item:hover div {
+                background-color: #f5f5f5 !important;
+            }
+            
+            /* Hide Google branding */
+            .goog-te-gadget img,
+            .goog-te-gadget-icon,
+            .goog-logo-link {
+                display: none !important;
+            }
+            
+            /* Mobile styles */
+@media screen and (max-width: 768px) {
+    .language-selector {
+        margin: 2px;
+        max-width: 120px;
+        font-size: 12px;
+        margin-left: -10px; /* Added negative margin to shift left */
+    }
+    
+    .goog-te-gadget-simple {
+        padding: 4px 8px !important;
+        transform: translate(-20px, 45px); /* Shift element left and down */
+    }
+    
+    .goog-te-menu-value {
+        font-size: 12px !important;
+        margin-left: -30px; /* Slight left adjustment */
+    }
 }
