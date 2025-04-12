@@ -155,6 +155,15 @@ window.addEventListener('load', function() {
               renderPagination();
           }
   
+          // Scroll to Deals Section
+          function scrollToDeals() {
+            const dealsSection = document.getElementById('deals-section');
+            if (dealsSection) {
+                setTimeout(() => {
+                    dealsSection.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
           // Search Functionality
           function searchDeals() {
               const searchTerm = document.getElementById("searchInput").value.toLowerCase();
@@ -326,29 +335,13 @@ if (localStorage.getItem('theme') === 'dark') {
 
 
     
-function renderDeals() {
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    const dealsToShow = filteredDeals.slice(start, end);
-
-    let dealsHTML = "";
-    dealsToShow.forEach((deal) => {
-        const { image1, title, salePrice, regularPrice, discount, link } = deal;
-        dealsHTML += `
-            <div class="card" onclick="showDealDetails(${JSON.stringify(deal).replace(/"/g, '&quot;')})">
-                <div class="discount">${discount}</div>
-                <img src="${image1}" alt="${title}">
-                <h3>${title}</h3>
-                <p class="price">${salePrice} <span class="old-price">${regularPrice}</span></p>
-                <p class="rating">★★★★☆</p>
-                <div class="card-actions">
-                    <a href="${link}" target="_blank" onclick="event.stopPropagation()">BUY NOW</a>
-                </div>
-            </div>
-        `;
-    });
-
-    document.getElementById("deals-container").innerHTML = dealsHTML;
+function scrollToDeals() {
+    const dealsSection = document.getElementById('deals-section');
+    if (dealsSection) {
+        setTimeout(() => {
+            dealsSection.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
 }
 
 // Counter Animation for Statistics
