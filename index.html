@@ -46,7 +46,9 @@
         </ul>
 
         <!-- Language Selector -->
-        <div id="google_translate_element" class="translate-element"></div>
+        <div class="language-selector">
+            <div id="google_translate_element" class="translate-element"></div>
+        </div>
 
         <!-- Theme Toggle Button -->
         <button id="theme-toggle" class="theme-toggle">
@@ -64,9 +66,7 @@
         <section class="hero-section" id="hero-section">
             <div class="hero-text">
                 <h1>Welcome to Save Radar</h1>
-                <p>Discover amazing discounts on a wide range of products, from electronics to fashion. Our platform
-                    curates the latest offers from top brands and retailers, ensuring you never miss out on a great
-                    deal. Join our community of savvy shoppers and start saving today!</p>
+                <p>Discover amazing discounts on a wide range of products, from electronics to fashion. Our platform curates the latest offers from top brands and retailers, ensuring you never miss out on a great deal. Join our community of savvy shoppers and start saving today!</p>
             </div>
         </section>
 
@@ -299,6 +299,15 @@
                     layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                     autoDisplay: false
                 }, 'google_translate_element');
+                
+                // Change default text
+                setTimeout(function() {
+                    const selectElement = document.querySelector('.goog-te-combo');
+                    if (selectElement) {
+                        selectElement.options[0].text = 'Languages';
+                        selectElement.value = '';
+                    }
+                }, 1000);
             }
         </script>
         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
