@@ -174,16 +174,19 @@
         .burger {
             display: none;
             cursor: pointer;
-            flex-direction: column;
-            gap: 5px;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1002;
         }
-
+        
         .burger div {
-            width: 30px;
-            height: 5px;
-            background: #fff;
-            border-radius: 3px;
-            transition: transform 0.3s, opacity 0.3s;
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 5px;
+            transition: all 0.3s ease;
         }
 
         /* Mobile styles */
@@ -241,15 +244,19 @@
             }
 
             .burger {
-                display: flex;
-                position: fixed; /* Change to fixed positioning */
-                right: 20px;
-                top: 20px; /* Adjust top position */
-                transform: translateY(0); /* Remove vertical centering */
-                gap: 5px;
-                z-index: 1003; /* Ensure it's above other elements */
-                cursor: pointer; /* Add pointer cursor */
-                padding: 10px; /* Add padding for larger touch target */
+                display: block;
+            }
+            
+            .burger.active .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .burger.active .line2 {
+                opacity: 0;
+            }
+            
+            .burger.active .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
             }
         }
 
